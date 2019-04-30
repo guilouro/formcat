@@ -1,20 +1,9 @@
-import React, { createContext, Component } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { get } from 'lodash';
+import { Consumer } from './create';
 
-const FormContext = createContext({
-  registeredFields: {},
-  isValid: true,
-  onRegister: undefined,
-  onChange: undefined,
-  onKeyUp: undefined,
-  onBlur: undefined,
-  onFocus: undefined,
-});
-
-export const FormProvider = FormContext.Provider;
-
-export const withContextForm = WrapperComponent => {
+const withContextForm = WrapperComponent => {
   class Field extends Component {
     static propTypes = {
       context: PropTypes.object.isRequired,
@@ -23,7 +12,6 @@ export const withContextForm = WrapperComponent => {
       onKeyUp: PropTypes.func,
       onFocus: PropTypes.func,
       onChange: PropTypes.func,
-      maxLength: PropTypes.number,
       defaultValue: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.number,
@@ -104,16 +92,13 @@ export const withContextForm = WrapperComponent => {
             onBlur={this.handleBlur}
             onKeyUp={this.handleKeyUp}
           />
-          {props.maxLength &&
-            <span>{`${props.maxLength - value.length}/${props.maxLength}`}</span>
-          }
         </React.Fragment>
       )
     }
   }
 
   return props => (
-    <FormContext.Consumer>
+    <Consumer>
       {({
         registeredFields,
         onRegister,
@@ -136,20 +121,8 @@ export const withContextForm = WrapperComponent => {
             }}
           />
         )}
-    </FormContext.Consumer>
+    </Consumer>
   );
 }
 
-export const withFormSubmit = WrapperComponent => (
-  props => (
-    <FormContext.Consumer>
-      {({ isValid }) => (
-        <WrapperComponent
-          type="submit"
-          {...props}
-          disabled={!isValid}
-        />
-      )}
-    </FormContext.Consumer>
-  )
-);
+export default withContextForm;

@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import { debounce } from "lodash";
+import { Provider } from "./create";
 import PropTypes from "prop-types";
-import { FormProvider } from "./form-context";
 
 class Form extends PureComponent {
   static propTypes = {
@@ -108,8 +108,9 @@ class Form extends PureComponent {
 
   isValidField = (name, value) => {
     const { validations, required } = this.state.registeredFields[name];
+    const { registeredFields } = this.state;
     return validations.every(
-      func => (value === "" && !required) || func(value)
+      func => (value === "" && !required) || func(value, registeredFields)
     );
   };
 
@@ -162,7 +163,7 @@ class Form extends PureComponent {
 
   render() {
     return (
-      <FormProvider
+      <Provider
         value={{
           registeredFields: this.state.registeredFields,
           isValid: this.state.isValid,
@@ -177,7 +178,7 @@ class Form extends PureComponent {
         <form onSubmit={this.onSubmit} noValidate>
           {this.props.children}
         </form>
-      </FormProvider>
+      </Provider>
     );
   }
 }
