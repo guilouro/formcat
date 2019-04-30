@@ -14,7 +14,7 @@ const FormContext = createContext({
 
 export const FormProvider = FormContext.Provider;
 
-export const withFormConsumer = WrapperComponent => {
+export const withContextForm = WrapperComponent => {
   class Field extends Component {
     static propTypes = {
       context: PropTypes.object.isRequired,
