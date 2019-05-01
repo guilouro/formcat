@@ -18,10 +18,8 @@ const withContextForm = WrapperComponent => {
         PropTypes.bool,
       ]),
       required: PropTypes.bool,
-      validations: PropTypes.arrayOf(
-        PropTypes.func,
-      ),
-    }
+      validations: PropTypes.arrayOf(PropTypes.func),
+    };
 
     static defaultProps = {
       onBlur: undefined,
@@ -32,14 +30,22 @@ const withContextForm = WrapperComponent => {
       defaultValue: '',
       required: false,
       validations: [],
-    }
+    };
 
     componentDidMount() {
-      this.props.context.onRegister(this.props.name, 'value', this.props.defaultValue);
-      this.props.context.onRegister(this.props.name, 'required', this.props.required);
+      this.props.context.onRegister(
+        this.props.name,
+        'value',
+        this.props.defaultValue
+      );
+      this.props.context.onRegister(
+        this.props.name,
+        'required',
+        this.props.required
+      );
       this.props.context.onRegister(this.props.name, 'validations', [
         ...this.props.validations,
-        ...this.props.required ? [(value) => !!value] : [],
+        ...(this.props.required ? [value => !!value] : []),
       ]);
     }
 
@@ -47,33 +53,33 @@ const withContextForm = WrapperComponent => {
       this.props.context.unRegister(this.props.name);
     }
 
-    handleBlur = (e) => {
+    handleBlur = e => {
       this.props.context.onBlur(e);
       if (this.props.onBlur) {
         this.props.onBlur(e);
       }
-    }
+    };
 
-    handleKeyUp = (e) => {
+    handleKeyUp = e => {
       this.props.context.onKeyUp(e);
       if (this.props.onKeyUp) {
         this.props.onKeyUp(e);
       }
-    }
+    };
 
-    handleChange = (e) => {
+    handleChange = e => {
       this.props.context.onChange(e);
       if (this.props.onChange) {
         this.props.onChange(e);
       }
-    }
+    };
 
-    handleFocus = (e) => {
+    handleFocus = e => {
       this.props.context.onFocus(e);
       if (this.props.onFocus) {
         this.props.onFocus(e);
       }
-    }
+    };
 
     render() {
       const { context, validations, defaultValue, ...props } = this.props;
@@ -93,7 +99,7 @@ const withContextForm = WrapperComponent => {
             onKeyUp={this.handleKeyUp}
           />
         </React.Fragment>
-      )
+      );
     }
   }
 
@@ -106,23 +112,23 @@ const withContextForm = WrapperComponent => {
         onChange,
         onBlur,
         onKeyUp,
-        onFocus
+        onFocus,
       }) => (
-          <Field
-            {...props}
-            context={{
-              registeredFields,
-              onRegister,
-              unRegister,
-              onChange,
-              onBlur,
-              onKeyUp,
-              onFocus
-            }}
-          />
-        )}
+        <Field
+          {...props}
+          context={{
+            registeredFields,
+            onRegister,
+            unRegister,
+            onChange,
+            onBlur,
+            onKeyUp,
+            onFocus,
+          }}
+        />
+      )}
     </Consumer>
   );
-}
+};
 
 export default withContextForm;

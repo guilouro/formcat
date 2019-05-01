@@ -1,25 +1,25 @@
-import React, { PureComponent } from "react";
-import { debounce } from "lodash";
-import { Provider } from "./create";
-import PropTypes from "prop-types";
+import React, { PureComponent } from 'react';
+import { debounce } from 'lodash';
+import { Provider } from './create';
+import PropTypes from 'prop-types';
 
 class Form extends PureComponent {
   static propTypes = {
     onSubmit: PropTypes.func,
     onFormChange: PropTypes.func,
     children: PropTypes.any.isRequired,
-    keyUpValidation: PropTypes.bool
+    keyUpValidation: PropTypes.bool,
   };
 
   static defaultProps = {
     onSubmit: undefined,
     onFormChange: undefined,
-    keyUpValidation: false
+    keyUpValidation: false,
   };
 
   state = {
     registeredFields: {},
-    isValid: true
+    isValid: true,
   };
 
   componentWillUnmount() {
@@ -83,14 +83,14 @@ class Form extends PureComponent {
 
   handleChange = e => {
     const { name, type } = e.target;
-    const value = type === "checkbox" ? e.target.checked : e.target.value;
-    this.registerUpdate(name, "value", value);
+    const value = type === 'checkbox' ? e.target.checked : e.target.value;
+    this.registerUpdate(name, 'value', value);
   };
 
   handleBlur = e => {
     const { name, value } = e.target;
-    this.registerUpdate(name, "active", false);
-    this.registerUpdate(name, "touched", true);
+    this.registerUpdate(name, 'active', false);
+    this.registerUpdate(name, 'touched', true);
     this.doValidate(name, value);
   };
 
@@ -103,22 +103,22 @@ class Form extends PureComponent {
 
   handleFocus = e => {
     const { name } = e.target;
-    this.registerUpdate(name, "active", true);
+    this.registerUpdate(name, 'active', true);
   };
 
   isValidField = (name, value) => {
     const { validations, required } = this.state.registeredFields[name];
     const { registeredFields } = this.state;
     return validations.every(
-      func => (value === "" && !required) || func(value, registeredFields)
+      func => (value === '' && !required) || func(value, registeredFields)
     );
   };
 
   doValidate = (name, value) => {
     const hasError = !this.isValidField(name, value);
     return Promise.all([
-      this.registerUpdate(name, "error", hasError),
-      this.registerUpdate(name, "touched", true)
+      this.registerUpdate(name, 'error', hasError),
+      this.registerUpdate(name, 'touched', true),
     ]);
   };
 
@@ -136,7 +136,7 @@ class Form extends PureComponent {
   }, 250);
 
   updateFieldValue = (name, value) => {
-    this.registerUpdate(name, "value", value).then(() => {
+    this.registerUpdate(name, 'value', value).then(() => {
       this.doValidate(name, value);
     });
   };
@@ -149,9 +149,9 @@ class Form extends PureComponent {
             ...prevState.registeredFields,
             [name]: {
               ...prevState.registeredFields[name],
-              [type]: value
-            }
-          }
+              [type]: value,
+            },
+          },
         }),
         () => {
           this.onFormChange({ name, type, value });
@@ -172,7 +172,7 @@ class Form extends PureComponent {
           onChange: this.handleChange,
           onBlur: this.handleBlur,
           onKeyUp: this.handleKeyUp,
-          onFocus: this.handleFocus
+          onFocus: this.handleFocus,
         }}
       >
         <form onSubmit={this.onSubmit} noValidate>
