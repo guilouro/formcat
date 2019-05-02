@@ -26,7 +26,6 @@ const withContextForm = WrapperComponent => {
       onKeyUp: undefined,
       onFocus: undefined,
       onChange: undefined,
-      maxLength: undefined,
       defaultValue: '',
       required: false,
       validations: [],

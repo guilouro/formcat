@@ -1,17 +1,37 @@
 import React from 'react';
-import { Form, InputField } from '../form';
-import withContextForm from '../form/withContextForm';
+import {
+  Form,
+  InputField,
+  SelectField,
+  TextareaField,
+  CheckboxField,
+} from '../form';
 
-const Input = withContextForm(({ error, ...props }) => <input {...props} />);
+export default function Main() {
+  return (
+    <>
+      <h1>Welcome</h1>
 
-const Main = () => (
-  <>
-    <h1>Welcome</h1>
+      <Form keyUpValidation>
+        <InputField name="my-input" defaultValue="Guilherme Louro" />
 
-    <Form keyUpValidation>
-      <Input name="asdasdasdas" />
-    </Form>
-  </>
-);
+        <SelectField
+          name="my-select"
+          defaultValue={2}
+          options={[
+            { label: 'Item 1', value: 1 },
+            { label: 'Item 2', value: 2 },
+          ]}
+        />
 
-export default Main;
+        <TextareaField name="my-textarea" />
+
+        <CheckboxField
+          name="my-check"
+          label="I'm agree"
+          defaultChecked={true}
+        />
+      </Form>
+    </>
+  );
+}
