@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { debounce } from 'lodash';
+import debounce from 'lodash/debounce';
 import { Provider } from './create';
 import PropTypes from 'prop-types';
 
@@ -27,20 +27,29 @@ class Form extends PureComponent {
     this.onKeyUp.cancel();
   }
 
-  onSubmit = e => {
+  onSubmit = async e => {
     e.preventDefault();
     if (!this.props.onSubmit) {
       return false;
     }
 
-    const promise = new Promise((resolve, reject) => {
-      this.hasError().then(err => {
-        if (err) return reject(this.state.registeredFields);
-        return resolve(this.state.registeredFields);
-      });
+    const data = Object.keys(this.state.registeredFields).map(key => ({
+      [key]: this.state.registeredFields[key].value,
+    }));
+
+    const field = {};
+    Object.keys(this.state.registeredFields).forEach(key => {
+      const { validations, ...rest } = this.state.registeredFields[key];
+      field[key] = {
+        ...rest,
+      };
     });
 
-    return this.props.onSubmit(promise);
+    this.props.onSubmit({
+      error: await this.hasError(),
+      data,
+      field,
+    });
   };
 
   onFormChange = ({ name, type, value }) => {
