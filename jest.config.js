@@ -3,11 +3,7 @@
 
 module.exports = {
   testEnvironment: 'jsdom',
-  testPathIgnorePatterns: [
-    '/node_modules/'
-  ],
-  snapshotSerializers: ['enzyme-to-json/serializer'],
-  setupFiles: [
-    '<rootDir>/.test-setup.js'
-  ]
-}
+  testPathIgnorePatterns: ['/node_modules/'],
+  collectCoverage: true,
+  collectCoverageFrom: ['src/components/form/**/*.js'],
+};

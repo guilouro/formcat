@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "start": "webpack-dev-server",
-    "test": "jest"
+    "test": "NODE_ENV=test jest"
   },
   "author": "Guilherme Louro (@guilouro)",
   "license": "MIT",
@@ -18,9 +18,6 @@
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.5",
-    "enzyme": "^3.8.0",
-    "enzyme-adapter-react-16": "^1.9.1",
-    "enzyme-to-json": "^3.3.5",
     "eslint": "^5.13.0",
     "eslint-config-standard": "^12.0.0",
     "eslint-config-standard-react": "^7.0.2",
@@ -32,6 +29,7 @@
     "html-webpack-plugin": "^3.2.0",
     "jest": "^24.1.0",
     "prettier": "^1.17.0",
+    "react-testing-library": "^7.0.0",
     "webpack": "^4.29.3",
     "webpack-cli": "^3.2.3",
     "webpack-dev-server": "^3.1.14"
