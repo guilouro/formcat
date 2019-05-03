@@ -33,7 +33,6 @@
 
 A simple and easy way to control forms with React Context API
 
-
 ## Getting Started
 
 ## Install
@@ -89,7 +88,9 @@ function Main () {
 | ----- | ---- | ------------- | ----------- |
 | **keyUpValidation** | Boolean | `false` | When `true` the validations works on Fields `keyUp` |
 | **onFormChange** | Function | `undefined` | A callback that return an object with `name`, `type` and `value`<br>of the each event's Form.  |
-| **onSubmit** | Function | `undefined` | A callback that return an Promise with the form values or error.  |
+| **onSubmit** | Function | `undefined` | A callback that return an object with the form status and values.  |
+
+
 
 *Obs: All *
 

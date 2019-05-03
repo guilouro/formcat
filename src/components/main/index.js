@@ -1,18 +1,18 @@
-import React, { useRef } from 'react';
+import React, { useRef } from 'react'
 import {
   Form,
   InputField,
   SelectField,
   TextareaField,
-  CheckboxField,
-} from '../form';
+  CheckboxField
+} from '../form'
 
 export default function Main() {
-  const form = useRef(null);
+  const form = useRef(null)
 
   const setValue = () => {
-    form.current.updateFieldValue('my-controlled-input', '@guilouro');
-  };
+    form.current.updateFieldValue('my-controlled-input', '@guilouro')
+  }
 
   return (
     <>
@@ -28,20 +28,16 @@ export default function Main() {
           defaultValue={2}
           options={[
             { label: 'Item 1', value: 1 },
-            { label: 'Item 2', value: 2 },
+            { label: 'Item 2', value: 2 }
           ]}
         />
 
         <TextareaField name="my-textarea" />
 
-        <CheckboxField
-          name="my-check"
-          label="I'm agree"
-          defaultChecked={true}
-        />
+        <CheckboxField name="my-check" label="I'm agree" defaultChecked />
       </Form>
 
       <button onClick={setValue}>Set @guilouro in input</button>
     </>
-  );
+  )
 }

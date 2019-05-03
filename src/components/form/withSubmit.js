@@ -1,5 +1,5 @@
-import React from 'react';
-import { Consumer } from './create';
+import React from 'react'
+import { Consumer } from './create'
 
 const withSubmit = WrapperComponent => props => (
   <Consumer>
@@ -7,6 +7,6 @@ const withSubmit = WrapperComponent => props => (
       <WrapperComponent type="submit" {...props} disabled={!isValid} />
     )}
   </Consumer>
-);
+)
 
-export default withSubmit;
+export default withSubmit

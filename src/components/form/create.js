@@ -1,4 +1,4 @@
-import { createContext } from 'react';
+import { createContext } from 'react'
 
 const FormContext = createContext({
   registeredFields: {},
@@ -7,7 +7,7 @@ const FormContext = createContext({
   onChange: undefined,
   onKeyUp: undefined,
   onBlur: undefined,
-  onFocus: undefined,
-});
+  onFocus: undefined
+})
 
-export const { Provider, Consumer } = FormContext;
+export const { Provider, Consumer } = FormContext

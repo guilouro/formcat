@@ -1,257 +1,257 @@
-import React, { useRef } from 'react';
-import { render, cleanup, fireEvent } from 'react-testing-library';
-import Form from './Form';
-import withContextForm from './withContextForm';
-import withSubmit from './withFormSubmit';
+import React, { useRef } from 'react'
+import { render, cleanup, fireEvent } from 'react-testing-library'
+import Form from './Form'
+import withContextForm from './withContextForm'
+import withSubmit from './withFormSubmit'
 
 jest.mock('lodash/debounce', () =>
   jest.fn(fn => {
-    fn.cancel = jest.fn();
-    return fn;
+    fn.cancel = jest.fn()
+    return fn
   })
-);
+)
 
 const SimpleField = withContextForm(({ error, ...input }) => (
   <>
     <input {...input} />
     {error && <span>Has error</span>}
   </>
-));
+))
 
-const Submit = withSubmit(props => <button {...props} />);
+const Submit = withSubmit(props => <button {...props} />)
 
 describe('<Form />', () => {
-  afterEach(cleanup);
+  afterEach(cleanup)
 
   it('Should render correctly', () => {
     const { container } = render(
       <Form>
         <SimpleField name="Lorem" />
       </Form>
-    );
+    )
 
-    expect(container.querySelectorAll('input[name="Lorem"]')).toHaveLength(1);
-    expect(container).toMatchSnapshot();
-  });
+    expect(container.querySelectorAll('input[name="Lorem"]')).toHaveLength(1)
+    expect(container).toMatchSnapshot()
+  })
 
   it('Should change value when write', () => {
     const { container } = render(
       <Form>
         <SimpleField name="Lorem" />
       </Form>
-    );
+    )
 
-    const input = container.querySelector('input[name="Lorem"]');
-    expect(input.value).toBe('');
-    fireEvent.change(input, { target: { value: 'Some text' } });
-    expect(input.value).toBe('Some text');
-  });
+    const input = container.querySelector('input[name="Lorem"]')
+    expect(input.value).toBe('')
+    fireEvent.change(input, { target: { value: 'Some text' } })
+    expect(input.value).toBe('Some text')
+  })
 
   it('Should start with initial value', () => {
     const { container } = render(
       <Form>
         <SimpleField name="Lorem" defaultValue="Some text" />
       </Form>
-    );
+    )
 
     expect(container.querySelector('input[name="Lorem"]').value).toBe(
       'Some text'
-    );
-  });
+    )
+  })
 
   it('Should start with initial checked', () => {
     const { container } = render(
       <Form>
         <SimpleField name="Lorem" type="checkbox" defaultChecked />
       </Form>
-    );
+    )
 
-    expect(container.querySelector('input[name="Lorem"]').value).toBe('');
-    expect(container.querySelector('input[name="Lorem"]').checked).toBe(true);
-  });
+    expect(container.querySelector('input[name="Lorem"]').value).toBe('')
+    expect(container.querySelector('input[name="Lorem"]').checked).toBe(true)
+  })
 
   it('Should set error when field is empty and required is true', () => {
     const { container, getByText, queryByText } = render(
       <Form>
         <SimpleField name="Lorem" required />
       </Form>
-    );
+    )
 
-    const input = container.querySelector('input[name="Lorem"]');
-    expect(input.required).toBeTruthy();
+    const input = container.querySelector('input[name="Lorem"]')
+    expect(input.required).toBeTruthy()
 
-    expect(queryByText(/Has error/g)).toBeNull();
-    fireEvent.blur(input);
-    expect(getByText(/Has error/g)).toBeTruthy();
-  });
+    expect(queryByText(/Has error/g)).toBeNull()
+    fireEvent.blur(input)
+    expect(getByText(/Has error/g)).toBeTruthy()
+  })
 
   it('Should remove error when field is not empty and required is true', () => {
     const { container, getByText, queryByText } = render(
       <Form>
         <SimpleField name="Lorem" required />
       </Form>
-    );
+    )
 
-    const input = container.querySelector('input[name="Lorem"]');
-    fireEvent.blur(input);
-    expect(getByText(/Has error/g)).toBeTruthy();
+    const input = container.querySelector('input[name="Lorem"]')
+    fireEvent.blur(input)
+    expect(getByText(/Has error/g)).toBeTruthy()
 
-    fireEvent.change(input, { target: { value: 'any' } });
-    fireEvent.blur(input);
-    expect(queryByText(/Has error/g)).toBeNull();
-  });
+    fireEvent.change(input, { target: { value: 'any' } })
+    fireEvent.blur(input)
+    expect(queryByText(/Has error/g)).toBeNull()
+  })
 
   it('Should set error when field does not match validation', () => {
-    const validation = value => value === '@guilouro';
+    const validation = value => value === '@guilouro'
 
     const { container, getByText, queryByText } = render(
       <Form>
         <SimpleField name="Lorem" validations={[validation]} />
       </Form>
-    );
+    )
 
-    const input = container.querySelector('input[name="Lorem"]');
+    const input = container.querySelector('input[name="Lorem"]')
 
-    expect(queryByText(/Has error/g)).toBeNull();
-    fireEvent.change(input, { target: { value: 'any' } });
-    fireEvent.blur(input);
-    expect(getByText(/Has error/g)).toBeTruthy();
-  });
+    expect(queryByText(/Has error/g)).toBeNull()
+    fireEvent.change(input, { target: { value: 'any' } })
+    fireEvent.blur(input)
+    expect(getByText(/Has error/g)).toBeTruthy()
+  })
 
   it('Should remove error when have validation match', () => {
-    const validation = value => value === '@guilouro';
+    const validation = value => value === '@guilouro'
 
     const { container, getByText, queryByText } = render(
       <Form>
         <SimpleField name="Lorem" validations={[validation]} />
       </Form>
-    );
+    )
 
-    const input = container.querySelector('input[name="Lorem"]');
+    const input = container.querySelector('input[name="Lorem"]')
 
-    fireEvent.change(input, { target: { value: 'any' } });
-    fireEvent.blur(input);
-    expect(getByText(/Has error/g)).toBeTruthy();
+    fireEvent.change(input, { target: { value: 'any' } })
+    fireEvent.blur(input)
+    expect(getByText(/Has error/g)).toBeTruthy()
 
-    fireEvent.change(input, { target: { value: '@guilouro' } });
-    fireEvent.blur(input);
-    expect(queryByText(/Has error/g)).toBeNull();
-  });
+    fireEvent.change(input, { target: { value: '@guilouro' } })
+    fireEvent.blur(input)
+    expect(queryByText(/Has error/g)).toBeNull()
+  })
 
   it('Should check validation with keyUp after touch field', () => {
-    const validation = value => value === '@guilouro';
+    const validation = value => value === '@guilouro'
 
     const { container, getByText, queryByText } = render(
       <Form keyUpValidation>
         <SimpleField name="Lorem" validations={[validation]} />
       </Form>
-    );
+    )
 
-    const input = container.querySelector('input[name="Lorem"]');
-    fireEvent.blur(input); // touch field
+    const input = container.querySelector('input[name="Lorem"]')
+    fireEvent.blur(input) // touch field
 
-    fireEvent.change(input, { target: { value: 'any' } });
-    fireEvent.keyUp(input);
-    expect(getByText(/Has error/g)).toBeTruthy();
+    fireEvent.change(input, { target: { value: 'any' } })
+    fireEvent.keyUp(input)
+    expect(getByText(/Has error/g)).toBeTruthy()
 
-    fireEvent.change(input, { target: { value: '@guilouro' } });
-    fireEvent.keyUp(input);
-    expect(queryByText(/Has error/g)).toBeNull();
-  });
+    fireEvent.change(input, { target: { value: '@guilouro' } })
+    fireEvent.keyUp(input)
+    expect(queryByText(/Has error/g)).toBeNull()
+  })
 
   it('Should not check validation with keyUp if field does not touched', () => {
-    const validation = value => value === '@guilouro';
+    const validation = value => value === '@guilouro'
 
     const { container, queryByText } = render(
       <Form keyUpValidation>
         <SimpleField name="Lorem" validations={[validation]} />
       </Form>
-    );
+    )
 
-    const input = container.querySelector('input[name="Lorem"]');
+    const input = container.querySelector('input[name="Lorem"]')
 
-    fireEvent.change(input, { target: { value: 'any' } });
-    fireEvent.keyUp(input);
-    expect(queryByText(/Has error/g)).toBeNull();
-  });
+    fireEvent.change(input, { target: { value: 'any' } })
+    fireEvent.keyUp(input)
+    expect(queryByText(/Has error/g)).toBeNull()
+  })
 
   it('Should call onChange', () => {
-    const onChange = jest.fn();
+    const onChange = jest.fn()
     const { container } = render(
       <Form>
         <SimpleField name="Lorem" onChange={onChange} />
       </Form>
-    );
+    )
 
     fireEvent.change(container.querySelector('input[name="Lorem"]'), {
-      target: { value: 'any' },
-    });
+      target: { value: 'any' }
+    })
 
-    expect(onChange).toBeCalled();
-  });
+    expect(onChange).toBeCalled()
+  })
 
   it('Should call onBlur', () => {
-    const onBlur = jest.fn();
+    const onBlur = jest.fn()
     const { container } = render(
       <Form>
         <SimpleField name="Lorem" onBlur={onBlur} />
       </Form>
-    );
+    )
 
-    fireEvent.blur(container.querySelector('input[name="Lorem"]'));
+    fireEvent.blur(container.querySelector('input[name="Lorem"]'))
 
-    expect(onBlur).toBeCalled();
-  });
+    expect(onBlur).toBeCalled()
+  })
 
   it('Should call onFocus', () => {
-    const onFocus = jest.fn();
+    const onFocus = jest.fn()
     const { container } = render(
       <Form>
         <SimpleField name="Lorem" onFocus={onFocus} />
       </Form>
-    );
+    )
 
-    fireEvent.focus(container.querySelector('input[name="Lorem"]'));
+    fireEvent.focus(container.querySelector('input[name="Lorem"]'))
 
-    expect(onFocus).toBeCalled();
-  });
+    expect(onFocus).toBeCalled()
+  })
 
   it('Should call onKeyUp', () => {
-    const onKeyUp = jest.fn();
+    const onKeyUp = jest.fn()
     const { container } = render(
       <Form>
         <SimpleField name="Lorem" onKeyUp={onKeyUp} />
       </Form>
-    );
+    )
 
-    fireEvent.keyUp(container.querySelector('input[name="Lorem"]'));
+    fireEvent.keyUp(container.querySelector('input[name="Lorem"]'))
 
-    expect(onKeyUp).toBeCalled();
-  });
+    expect(onKeyUp).toBeCalled()
+  })
 
   it('Should call onSubmit', done => {
-    const onSubmit = jest.fn();
-    const { container, getByText } = render(
+    const onSubmit = jest.fn()
+    const { getByText } = render(
       <Form onSubmit={onSubmit}>
         <SimpleField name="Lorem" />
         <Submit>Submit</Submit>
       </Form>
-    );
+    )
 
-    fireEvent.click(getByText(/Submit/g));
+    fireEvent.click(getByText(/Submit/g))
 
     setImmediate(() => {
-      expect(onSubmit).toBeCalled();
-      done();
-    });
-  });
+      expect(onSubmit).toBeCalled()
+      done()
+    })
+  })
 
   it('Should set value using updateFieldValue', () => {
     const WithRef = () => {
-      const form = useRef(null);
+      const form = useRef(null)
       const handleClick = () => {
-        form.current.updateFieldValue('Lorem', '@guilouro');
-      };
+        form.current.updateFieldValue('Lorem', '@guilouro')
+      }
       return (
         <>
           <Form ref={form}>
@@ -259,28 +259,28 @@ describe('<Form />', () => {
           </Form>
           <button onClick={handleClick}>Change</button>
         </>
-      );
-    };
+      )
+    }
 
-    const { container, getByText } = render(<WithRef />);
-    fireEvent.click(getByText(/Change/g));
+    const { container, getByText } = render(<WithRef />)
+    fireEvent.click(getByText(/Change/g))
     expect(container.querySelector('input[name="Lorem"]').value).toBe(
       '@guilouro'
-    );
-  });
+    )
+  })
 
   it('Should return field values with onSubmit', done => {
-    const onSubmit = jest.fn();
+    const onSubmit = jest.fn()
     const { container, getByText } = render(
       <Form onSubmit={onSubmit}>
         <SimpleField name="Lorem" />
         <Submit>Submit</Submit>
       </Form>
-    );
+    )
 
-    const input = container.querySelector('input[name="Lorem"]');
-    fireEvent.change(input, { target: { value: 'any' } });
-    fireEvent.blur(input);
+    const input = container.querySelector('input[name="Lorem"]')
+    fireEvent.change(input, { target: { value: 'any' } })
+    fireEvent.blur(input)
 
     const expectData = {
       data: [{ Lorem: 'any' }],
@@ -291,31 +291,31 @@ describe('<Form />', () => {
           error: false,
           required: false,
           touched: true,
-          value: 'any',
-        },
-      },
-    };
+          value: 'any'
+        }
+      }
+    }
 
-    fireEvent.click(getByText(/Submit/g));
+    fireEvent.click(getByText(/Submit/g))
 
     setImmediate(() => {
-      expect(onSubmit).toBeCalledWith(expectData);
-      done();
-    });
-  });
+      expect(onSubmit).toBeCalledWith(expectData)
+      done()
+    })
+  })
 
   it('Should return error when form is not valid', done => {
-    const onSubmit = jest.fn();
+    const onSubmit = jest.fn()
     const { container, getByText } = render(
       <Form onSubmit={onSubmit}>
         <SimpleField name="Lorem" required />
         <button>Submit</button>
       </Form>
-    );
+    )
 
-    const input = container.querySelector('input[name="Lorem"]');
-    fireEvent.focus(input);
-    fireEvent.blur(input);
+    const input = container.querySelector('input[name="Lorem"]')
+    fireEvent.focus(input)
+    fireEvent.blur(input)
 
     const expectData = {
       data: [{ Lorem: '' }],
@@ -326,71 +326,71 @@ describe('<Form />', () => {
           error: true,
           required: true,
           touched: true,
-          value: '',
-        },
-      },
-    };
+          value: ''
+        }
+      }
+    }
 
-    fireEvent.click(getByText(/Submit/g));
+    fireEvent.click(getByText(/Submit/g))
 
     setImmediate(() => {
-      expect(onSubmit).toBeCalledWith(expectData);
-      done();
-    });
-  });
+      expect(onSubmit).toBeCalledWith(expectData)
+      done()
+    })
+  })
 
   describe('onFormChange', () => {
-    let onFormChange, input;
+    let onFormChange, input
 
     beforeEach(() => {
-      onFormChange = jest.fn();
+      onFormChange = jest.fn()
       const { container } = render(
         <Form onFormChange={onFormChange}>
           <SimpleField name="Lorem" />
         </Form>
-      );
+      )
 
-      input = container.querySelector('input[name="Lorem"]');
-      onFormChange.mockRestore();
-    });
+      input = container.querySelector('input[name="Lorem"]')
+      onFormChange.mockRestore()
+    })
 
     afterEach(() => {
-      onFormChange.mockRestore();
-    });
+      onFormChange.mockRestore()
+    })
 
     it('Should called with onChange', () => {
       // On Change
-      fireEvent.change(input, { target: { value: 'any' } });
+      fireEvent.change(input, { target: { value: 'any' } })
       expect(onFormChange).toBeCalledWith({
         name: 'Lorem',
         type: 'value',
-        value: 'any',
-      });
-    });
+        value: 'any'
+      })
+    })
 
     it('Should called with onBlur', () => {
       // On Bur
-      fireEvent.blur(input);
+      fireEvent.blur(input)
       expect(onFormChange).toBeCalledWith({
         name: 'Lorem',
         type: 'touched',
-        value: true,
-      });
+        value: true
+      })
       expect(onFormChange).toBeCalledWith({
         name: 'Lorem',
         type: 'active',
-        value: false,
-      });
-    });
+        value: false
+      })
+    })
 
     it('Should called with onFocus', () => {
       // On Focus
-      fireEvent.focus(input);
+      fireEvent.focus(input)
       expect(onFormChange).toBeCalledWith({
         name: 'Lorem',
         type: 'active',
-        value: true,
-      });
-    });
-  });
-});
+        value: true
+      })
+    })
+  })
+})
