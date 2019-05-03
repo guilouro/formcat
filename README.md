@@ -26,12 +26,24 @@
  * Act with ref
  * updateFieldValue
  *
+ *
+ * Fields Default
+ * > InputField
+ * > SelectField
+ * > TextField
+ * > Submit
+ *
+ *
  */
  -->
 
 # React Context Form
 
 A simple and easy way to control forms with React Context API
+
+
+[![Build Status](https://travis-ci.com/guilouro/react-context-form.svg?token=ypLGJBT7BX8hXAJnirC4&branch=master)](https://travis-ci.com/guilouro/react-context-form)
+
 
 ## Getting Started
 
