@@ -43,7 +43,6 @@ A simple and easy way to control forms with React Context API
 
 
 [![Build Status](https://travis-ci.com/guilouro/react-context-form.svg?token=ypLGJBT7BX8hXAJnirC4&branch=master)](https://travis-ci.com/guilouro/react-context-form)
-
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 
 
