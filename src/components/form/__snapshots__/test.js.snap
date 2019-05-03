@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Form /> Should render correctly 1`] = `
+<div>
+  <form
+    novalidate=""
+  >
+    <input
+      name="Lorem"
+      value=""
+    />
+  </form>
+</div>
+`;
