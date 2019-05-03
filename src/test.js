@@ -1,8 +1,6 @@
 import React, { useRef } from 'react'
 import { render, cleanup, fireEvent } from 'react-testing-library'
-import Form from './Form'
-import withContextForm from './withContextForm'
-import withSubmit from './withSubmit'
+import { Form, withContextForm, withSubmit } from '.'
 
 jest.mock('lodash/debounce', () =>
   jest.fn(fn => {

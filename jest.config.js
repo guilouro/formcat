@@ -5,5 +5,5 @@ module.exports = {
   testEnvironment: 'jsdom',
   testPathIgnorePatterns: ['/node_modules/'],
   collectCoverage: true,
-  collectCoverageFrom: ['src/components/form/**/*.js'],
-};
+  collectCoverageFrom: ['src/**/*.js']
+}

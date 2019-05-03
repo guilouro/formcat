@@ -1,9 +1,5 @@
-import React from 'react'
-import { render } from 'react-dom'
-import Main from './components/main'
+import Form from './Form'
+import withContextForm from './withContextForm'
+import withSubmit from './withSubmit'
 
-const App = () => (
-  <Main />
-)
-
-render(<App />, document.getElementById('main'))
+export { Form, withContextForm, withSubmit }

@@ -5,7 +5,7 @@ import {
   SelectField,
   TextareaField,
   CheckboxField
-} from '../form'
+} from '../../../src'
 
 export default function Main() {
   const form = useRef(null)
