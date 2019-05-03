@@ -52,9 +52,7 @@ yarn add react-context-form
 
 ## How to use
 
-The implementation of the React Context Form is simple.
-
-First of all we need to create a Field using the [Higher-Order Components (HOCs)](https://facebook.github.io/react/docs/higher-order-components.html) `withContextForm` as the example bellow:
+First of all we need to create a Field using the [HOC](https://facebook.github.io/react/docs/higher-order-components.html) `withContextForm` as the example bellow:
 
 ```js
 /* InputField.js */
@@ -90,8 +88,10 @@ function Main () {
 | Props | Type | Default value | Description |
 | ----- | ---- | ------------- | ----------- |
 | **keyUpValidation** | Boolean | `false` | When `true` the validations works on Fields `keyUp` |
-| **onFormChange** | Function | `undefined` | A callback that return an object with `name`, `type` and `value` of the each event's Form.  |
+| **onFormChange** | Function | `undefined` | A callback that return an object with `name`, `type` and `value`<br>of the each event's Form.  |
 | **onSubmit** | Function | `undefined` | A callback that return an Promise with the form values or error.  |
+
+*Obs: All *
 
 
 ### Field
@@ -113,12 +113,13 @@ We can use many validations per field using the props `validations`. All that we
 ```js
 import { Form, withFormContext } from 'react-context-form';
 
-const Field = withFormContext(({ error, ...input }) => {}(
+const Field = withFormContext(({ error, ...input }) => (
   <input {...input} />;
 ));
 
 
 const Main = () => {
+
   // Validate if username is @guilouro
   const usernameValidation = value => (
     value === '@guilouro'
@@ -151,7 +152,6 @@ function anyName (value, state) {}
 We can set values out of Form using `Ref` and `updateFieldValue` as example bellow:
 
 ```js
-
 import { Form, withFormContext } from 'react-context-form';
 
 const Field = withFormContext(({ error, ...input }) => {}(
@@ -163,7 +163,7 @@ const Main = () => {
   const form = useRef(null);
 
   const setValue = () => {
-    form.updateFieldValue('username', '@guilouro');
+    form.current.updateFieldValue('username', '@guilouro');
   }
 
   return (

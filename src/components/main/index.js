@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import {
   Form,
   InputField,
@@ -8,12 +8,20 @@ import {
 } from '../form';
 
 export default function Main() {
+  const form = useRef(null);
+
+  const setValue = () => {
+    form.current.updateFieldValue('my-controlled-input', '@guilouro');
+  };
+
   return (
     <>
       <h1>Welcome</h1>
 
-      <Form keyUpValidation>
+      <Form keyUpValidation ref={form}>
         <InputField name="my-input" defaultValue="Guilherme Louro" />
+
+        <InputField name="my-controlled-input" />
 
         <SelectField
           name="my-select"
@@ -32,6 +40,8 @@ export default function Main() {
           defaultChecked={true}
         />
       </Form>
+
+      <button onClick={setValue}>Set @guilouro in input</button>
     </>
   );
 }
