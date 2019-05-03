@@ -19,7 +19,7 @@ export default function Main() {
       <h1>Welcome</h1>
 
       <Form keyUpValidation ref={form}>
-        <InputField name="my-input" defaultValue="Guilherme Louro" />
+        <InputField name="my-input" required />
 
         <InputField name="my-controlled-input" />
 
