@@ -5,6 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "start": "webpack-dev-server",
+    "lint": "eslint src",
     "test": "NODE_ENV=test jest"
   },
   "author": "Guilherme Louro (@guilouro)",
