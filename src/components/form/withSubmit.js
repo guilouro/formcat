@@ -1,6 +1,7 @@
 import React from 'react';
+import { Consumer } from './create';
 
-const withFormSubmit = WrapperComponent => props => (
+const withSubmit = WrapperComponent => props => (
   <Consumer>
     {({ isValid }) => (
       <WrapperComponent type="submit" {...props} disabled={!isValid} />
@@ -8,4 +9,4 @@ const withFormSubmit = WrapperComponent => props => (
   </Consumer>
 );
 
-export default withFormSubmit;
+export default withSubmit;
