@@ -29,9 +29,6 @@ class Form extends PureComponent {
 
   onSubmit = async e => {
     e.preventDefault()
-    if (!this.props.onSubmit) {
-      return false
-    }
 
     const data = Object.keys(this.state.registeredFields).map(key => ({
       [key]: this.state.registeredFields[key].value

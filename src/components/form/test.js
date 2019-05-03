@@ -2,7 +2,7 @@ import React, { useRef } from 'react'
 import { render, cleanup, fireEvent } from 'react-testing-library'
 import Form from './Form'
 import withContextForm from './withContextForm'
-import withSubmit from './withFormSubmit'
+import withSubmit from './withSubmit'
 
 jest.mock('lodash/debounce', () =>
   jest.fn(fn => {
@@ -68,6 +68,20 @@ describe('<Form />', () => {
 
     expect(container.querySelector('input[name="Lorem"]').value).toBe('')
     expect(container.querySelector('input[name="Lorem"]').checked).toBe(true)
+  })
+
+  it('Should change checked', () => {
+    const { container } = render(
+      <Form>
+        <SimpleField name="Lorem" type="checkbox" />
+      </Form>
+    )
+
+    const input = container.querySelector('input[name="Lorem"]')
+
+    expect(input.value).toBe('')
+    fireEvent.click(input)
+    expect(input.checked).toBe(true)
   })
 
   it('Should set error when field is empty and required is true', () => {
@@ -244,6 +258,17 @@ describe('<Form />', () => {
       expect(onSubmit).toBeCalled()
       done()
     })
+  })
+
+  it('Should disabled Submit when Form is not valid', () => {
+    const { getByText } = render(
+      <Form>
+        <SimpleField name="Lorem" required />
+        <Submit>Submit</Submit>
+      </Form>
+    )
+
+    expect(getByText(/Submit/g).hasAttribute('disabled')).toBeTruthy()
   })
 
   it('Should set value using updateFieldValue', () => {
