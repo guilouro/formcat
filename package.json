@@ -38,6 +38,7 @@
   "dependencies": {
     "@babel/runtime": "^7.4.4",
     "lodash": "^4.17.11",
+    "prop-types": "^15.7.2",
     "react": "^16.8.5",
     "react-dom": "^16.8.5"
   }
