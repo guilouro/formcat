@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Fields Should submit correctly 1`] = `
+<div>
+  <form
+    novalidate=""
+  >
+    <div>
+      <label
+        for="First Name"
+      >
+        First Name
+      </label>
+      <input
+        id="First Name"
+        name="first_name"
+        value="Guilherme Louro"
+      />
+    </div>
+    <div>
+      <label
+        for="Gender"
+      >
+        Gender
+      </label>
+      <select
+        id="Gender"
+        name="gender"
+      >
+        <option
+          value="Female"
+        >
+          Female
+        </option>
+        <option
+          value="Male"
+        >
+          Male
+        </option>
+      </select>
+    </div>
+    <div>
+      <label
+        for="I agree"
+      >
+        I agree
+        *
+      </label>
+      <input
+        id="I agree"
+        name="agree"
+        required=""
+        type="checkbox"
+        value="true"
+      />
+    </div>
+    <div>
+      <label
+        for="Some message"
+      >
+        Some message
+      </label>
+      <textarea
+        id="Some message"
+        name="message"
+      >
+        I hope that these tests have been passed
+      </textarea>
+    </div>
+    <button
+      type="submit"
+    >
+      Submit
+    </button>
+  </form>
+</div>
+`;
