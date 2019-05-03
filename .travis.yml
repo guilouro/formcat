@@ -9,7 +9,4 @@ cache:
 script:
 - npm run lint
 after_script:
-- npm t
-deploy:
-  provider: npm
-  email: guipclouro@gmail.com
+- npm run test
