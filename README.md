@@ -1,6 +1,6 @@
 # React Context Form
 
-A simple and easy way to control forms with React Context API
+A simple and easy way to control forms in React using the [React Context API](https://reactjs.org/docs/context.html)
 
 
 [![Build Status](https://travis-ci.com/guilouro/react-context-form.svg?token=ypLGJBT7BX8hXAJnirC4&branch=master)](https://travis-ci.com/guilouro/react-context-form)
