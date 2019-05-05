@@ -1,42 +1,3 @@
-<!--
-/**
- * Getting start
- * > install with npm
- * > install with yarn
- *
- *
- * How to use
- * > Import Form
- * > create Field
- * > Using Submit
- * > Using validations
- * >
- *
- *
- * <Form>
- * keyUpValidation
- * onFormChange
- * onSubmit
- *
- *
- * <Fields>
- * defaultValue: '',
- * validations: [],
- *
- * Act with ref
- * updateFieldValue
- *
- *
- * Fields Default
- * > InputField
- * > SelectField
- * > TextField
- * > Submit
- *
- *
- */
- -->
-
 # React Context Form
 
 A simple and easy way to control forms with React Context API
@@ -65,25 +26,25 @@ yarn add react-context-form
 
 ## How to use
 
-First of all we need to create a Field using the [HOC](https://facebook.github.io/react/docs/higher-order-components.html) `withContextForm` as the example bellow:
+First of all, we need to create a Field using the [HOC](https://facebook.github.io/react/docs/higher-order-components.html) `withContextForm` as the example below:
 
 ```js
 /* InputField.js */
 
-import { withContextForm } from 'react-context-form';
+import { withContextForm } from 'react-context-form'
 
 const InputField = ({ error, ...input }) => (
   <input {...input} />
-);
+)
 
-export default withContextForm(InputField);
+export default withContextForm(InputField)
 ```
 
-Now we can use this component inside of Form:
+Now we can use this component inside the Form:
 
 ```js
-import { Form } from 'react-contex-form';
-import InputField from './InputField';
+import { Form } from 'react-contex-form'
+import InputField from './InputField'
 
 function Main () {
   return (
@@ -100,37 +61,61 @@ function Main () {
 
 | Props | Type | Default value | Description |
 | ----- | ---- | ------------- | ----------- |
-| **keyUpValidation** | Boolean | `false` | When `true` the validations works on Fields `keyUp` |
-| **onFormChange** | Function | `undefined` | A callback that return an object with `name`, `type` and `value`<br>of the each event's Form.  |
-| **onSubmit** | Function | `undefined` | A callback that return an object with the form status and values.  |
+| **keyUpValidation** | Boolean | `false` | When `true` the validations Field works with `keyUp` |
+| **onFormChange** | Function | `undefined` | A callback that returns an object with `name`, `type` and `value`<br> of the current change.  |
+| **onSubmit** | Function | `undefined` | A callback that returns an object with status and values.  |
+
+### Submit
+
+For an easy `submit` process we can use the HOC `withSubmit` and create a Button that will be controlled by Form, or using the Submit component that already exists.
+
+```js
+// Creating
+import { withSubmit } from 'react-context-form'
+
+const Submit = withSubmit(props => <button {...props} />)
+
+//or
+
+import { Submit } from 'react-context-form'
+
+// Using
+
+...
+  render (
+    <Form>
+      ...
+      <Submit> Button Text </Submit>
+    </Form>
+  )
+...
+```
+
+*Obs: This `button` will be enabled when Form is valid and disabled when is not valid*
 
 
+### Custom Field
 
-*Obs: All *
-
-
-### Field
-
-It's a generic name for a component created by `withContextForm`.
+It's a field created with `withContextForm`.
 
 | Props | Type | Default value | Description |
 | ----- | ---- | ------------- | ----------- |
-| **error** | Boolean | `false` | A flag that controll the field validation |
-| **validations** | Array | `[]` | A list with all function validations of this field |
+| **error** | Boolean | `false` | A flag that controls the field validation |
+| **validations** | Array | `[]` | A list with functions validation |
 | **required** | Boolean | `false` | Set required validation for this field |
 | **defaultValue** | String | `""` | Set initial text value |
 | **defaultChecked** | String | `""` | Set initial checked for field |
 
 ## Using validations
 
-We can use many validations per field using the props `validations`. All that we need to do is create a pure function that return `true` or `false` following the example bellow:
+We can use many validations per field using the props `validations`. All we need to do is create a pure function that returns `true` or `false` following the example below:
 
 ```js
-import { Form, withFormContext } from 'react-context-form';
+import { Form, withFormContext } from 'react-context-form'
 
 const Field = withFormContext(({ error, ...input }) => (
-  <input {...input} />;
-));
+  <input {...input} />
+))
 
 
 const Main = () => {
@@ -154,7 +139,7 @@ const Main = () => {
 A validation function has two params `value` and `state`:
 
 ```js
-function anyName (value, state) {}
+function validationName (value, state) {}
 ```
 
 | Param | Type | Description |
@@ -164,21 +149,26 @@ function anyName (value, state) {}
 
 ### Set values
 
-We can set values out of Form using `Ref` and `updateFieldValue` as example bellow:
+We can set values out of Form using `Ref` and `updateFieldValue` as the example below:
+
+| Param | Type | Description |
+| ----- | ---- | ------------- |
+| **name** | String  | Field name |
+| **text** | String  | A new value for this field |
 
 ```js
-import { Form, withFormContext } from 'react-context-form';
+import { Form, withFormContext } from 'react-context-form'
 
 const Field = withFormContext(({ error, ...input }) => {}(
-  <input {...input} />;
-));
+  <input {...input} />
+))
 
 
 const Main = () => {
-  const form = useRef(null);
+  const form = useRef(null)
 
   const setValue = () => {
-    form.current.updateFieldValue('username', '@guilouro');
+    form.current.updateFieldValue('username', '@guilouro')
   }
 
   return (
@@ -195,4 +185,76 @@ const Main = () => {
 }
 
 ```
+
+## Fields we can use
+
+There are some simple field created with `withContexForm` we can use in project or use as a reference for create a new custon field
+
+### InputField
+
+A simple `input` field
+
+```js
+import { InputField } from 'react-context-form/Fields'
+
+...
+<InputField
+  label="My Input"
+  name="my-select"
+/>
+...
+```
+
+| Param | Type | Default value | Description |
+| ----- | ---- | ------------- | --------------|
+| **label** | String  | `''` | A label for this field |
+| **type** | String  | `text` | A label for this field |
+
+*Obs: And all common props*
+
+### SelectField
+
+A simple `select` field
+
+```js
+import { SelectField } from 'react-context-form/Fields'
+
+...
+<SelectField
+  label="My Select"
+  name="my-select"
+  options={[
+    { label: 'Item 1', value: 1 }
+  ]}
+/>
+...
+```
+
+| Param | Type | Default value | Description |
+| ----- | ---- | ------------- | --------------|
+| **label** | String  | `''` | A label for this field |
+| **options** | Array  | `[]` | A list of objects with `label` and `value` |
+
+*Obs: And all common props*
+
+### TextField
+
+A simple `textarea` field
+
+```js
+import { TextareaField } from 'react-context-form/Fields'
+
+...
+<TextareaField
+  label="My Text"
+  name="my-text"
+/>
+...
+```
+
+| Param | Type | Default value | Description |
+| ----- | ---- | ------------- | --------------|
+| **label** | String  | `''` | A label for this field |
+
+*Obs: And all common props*
 
