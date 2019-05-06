@@ -1,4 +1,4 @@
-# Formcat
+![Formcat](./logo.jpg)
 
 A simple and easy way to control forms in React using the [React Context API](https://reactjs.org/docs/context.html)
 
