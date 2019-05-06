@@ -1,9 +1,9 @@
-# React Context Form
+# Formcat
 
 A simple and easy way to control forms in React using the [React Context API](https://reactjs.org/docs/context.html)
 
 
-[![Build Status](https://travis-ci.com/guilouro/react-context-form.svg?token=ypLGJBT7BX8hXAJnirC4&branch=master)](https://travis-ci.com/guilouro/react-context-form)
+[![Build Status](https://travis-ci.com/guilouro/formcat.svg?token=ypLGJBT7BX8hXAJnirC4&branch=master)](https://travis-ci.com/guilouro/formcat)
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 
 
@@ -15,13 +15,13 @@ A simple and easy way to control forms in React using the [React Context API](ht
 With npm
 
 ```
-npm install --save react-context-form
+npm install --save formcat
 ```
 
 With yarn
 
 ```
-yarn add react-context-form
+yarn add formcat
 ```
 
 ## How to use
@@ -31,7 +31,7 @@ First of all, we need to create a Field using the [HOC](https://facebook.github.
 ```js
 /* InputField.js */
 
-import { withContextForm } from 'react-context-form'
+import { withContextForm } from 'formcat'
 
 const InputField = ({ error, ...input }) => (
   <input {...input} />
@@ -71,13 +71,13 @@ For an easy `submit` process we can use the HOC `withSubmit` and create a Button
 
 ```js
 // Creating
-import { withSubmit } from 'react-context-form'
+import { withSubmit } from 'formcat'
 
 const Submit = withSubmit(props => <button {...props} />)
 
 //or
 
-import { Submit } from 'react-context-form'
+import { Submit } from 'formcat'
 
 // Using
 
@@ -111,7 +111,7 @@ It's a field created with `withContextForm`.
 We can use many validations per field using the props `validations`. All we need to do is create a pure function that returns `true` or `false` following the example below:
 
 ```js
-import { Form, withFormContext } from 'react-context-form'
+import { Form, withFormContext } from 'formcat'
 
 const Field = withFormContext(({ error, ...input }) => (
   <input {...input} />
@@ -157,7 +157,7 @@ We can set values out of Form using `Ref` and `updateFieldValue` as the example 
 | **text** | String  | A new value for this field |
 
 ```js
-import { Form, withFormContext } from 'react-context-form'
+import { Form, withFormContext } from 'formcat'
 
 const Field = withFormContext(({ error, ...input }) => {}(
   <input {...input} />
@@ -195,7 +195,7 @@ There are some simple field created with `withContexForm` we can use in project 
 A simple `input` field
 
 ```js
-import { InputField } from 'react-context-form/Fields'
+import { InputField } from 'formcat/Fields'
 
 ...
 <InputField
@@ -217,7 +217,7 @@ import { InputField } from 'react-context-form/Fields'
 A simple `select` field
 
 ```js
-import { SelectField } from 'react-context-form/Fields'
+import { SelectField } from 'formcat/Fields'
 
 ...
 <SelectField
@@ -242,7 +242,7 @@ import { SelectField } from 'react-context-form/Fields'
 A simple `textarea` field
 
 ```js
-import { TextareaField } from 'react-context-form/Fields'
+import { TextareaField } from 'formcat/Fields'
 
 ...
 <TextareaField

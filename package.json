@@ -1,15 +1,21 @@
 {
-  "name": "react-context-form",
+  "name": "formcat",
   "version": "1.0.0",
-  "description": "A way to manage forms with React Context API",
+  "description": "A simple and easy way to control forms in React using the React Context API",
   "main": "src/index.js",
   "scripts": {
     "start": "webpack-dev-server",
     "lint": "eslint src",
     "test": "NODE_ENV=test jest"
   },
-  "author": "Guilherme Louro (@guilouro)",
+  "author": "Guilherme Louro (http://github.com/guilouro)",
   "license": "MIT",
+  "keywords": [
+    "react",
+    "reactjs",
+    "context",
+    "form"
+  ],
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.2.2",
@@ -42,5 +48,9 @@
     "prop-types": "^15.7.2",
     "react": "^16.8.5",
     "react-dom": "^16.8.5"
+  },
+  "peerDependencies": {
+    "react": "^16.8.x",
+    "react-dom": "^16.8.x"
   }
 }
