@@ -1,4 +1,4 @@
-<p align="center"><img src="./logo.jpg" /></p>
+<p align="center"><img src="./logo.jpg" width="550px"/></p>
 
 A simple and easy way to control forms in React using the [React Context API](https://reactjs.org/docs/context.html)
 
