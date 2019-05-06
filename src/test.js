@@ -306,7 +306,7 @@ describe('<Form />', () => {
     fireEvent.blur(input)
 
     const expectData = {
-      data: [{ Lorem: 'any' }],
+      data: { Lorem: 'any' },
       error: false,
       field: {
         Lorem: {
@@ -341,7 +341,7 @@ describe('<Form />', () => {
     fireEvent.blur(input)
 
     const expectData = {
-      data: [{ Lorem: '' }],
+      data: { Lorem: '' },
       error: true,
       field: {
         Lorem: {

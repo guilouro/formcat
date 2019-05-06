@@ -30,16 +30,12 @@ class Form extends PureComponent {
   onSubmit = async e => {
     e.preventDefault()
 
-    const data = Object.keys(this.state.registeredFields).map(key => ({
-      [key]: this.state.registeredFields[key].value
-    }))
-
+    const data = {}
     const field = {}
     Object.keys(this.state.registeredFields).forEach(key => {
       const { validations, ...rest } = this.state.registeredFields[key]
-      field[key] = {
-        ...rest
-      }
+      data[key] = this.state.registeredFields[key].value
+      field[key] = { ...rest }
     })
 
     this.props.onSubmit({
