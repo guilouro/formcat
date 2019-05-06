@@ -258,3 +258,8 @@ import { TextareaField } from 'formcat/Fields'
 
 *Obs: And all common props*
 
+
+## Contributing
+
+If you want to contribute with this component:
+[Contributing Documentation](https://github.com/guilouro/formcat/blob/master/.github/CONTRIBUTING.md).
