@@ -1,4 +1,4 @@
-![Formcat](./logo.jpg)
+<p align="center"><img src="./logo.jpg" /></p>
 
 A simple and easy way to control forms in React using the [React Context API](https://reactjs.org/docs/context.html)
 
