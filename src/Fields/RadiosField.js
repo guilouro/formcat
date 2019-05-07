@@ -14,7 +14,11 @@ const RadiosField = ({ label, options, error, ...input }) => {
 
   return (
     <>
-      {label && <div>{label}</div>}
+      {label && (
+        <label>
+          {label} {input.required && ' *'}
+        </label>
+      )}
       {options.map(item => (
         <Wrapper
           key={item.value}
@@ -26,7 +30,7 @@ const RadiosField = ({ label, options, error, ...input }) => {
           <input
             {...input}
             value={item.value}
-            checked={item.value === checkedItem}
+            checked={item.value === checkedItem || item.value === input.value}
             onClick={() => handleClick(item.value)}
             type="radio"
           />
@@ -44,12 +48,14 @@ RadiosField.propTypes = {
       checked: PropTypes.bool
     })
   ),
+  required: PropTypes.bool,
   error: PropTypes.bool.isRequired,
   label: PropTypes.string
 }
 
 RadiosField.defaultProps = {
   label: '',
+  required: false,
   options: []
 }
 
