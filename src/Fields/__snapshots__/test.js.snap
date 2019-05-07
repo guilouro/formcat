@@ -40,12 +40,48 @@ exports[`Fields Should submit correctly 1`] = `
       </select>
     </div>
     <div>
+      How many time do you work as developer?
+    </div>
+    <div>
+      <input
+        id="1 - 3 years"
+        name="time_as_developer"
+        type="radio"
+        value="1-3"
+      />
       <label
-        for="I agree"
+        for="1 - 3 years"
       >
-        I agree
-        *
+        1 - 3 years
       </label>
+    </div>
+    <div>
+      <input
+        id="3 - 5 years"
+        name="time_as_developer"
+        type="radio"
+        value="3-5"
+      />
+      <label
+        for="3 - 5 years"
+      >
+        3 - 5 years
+      </label>
+    </div>
+    <div>
+      <input
+        id="+5 years"
+        name="time_as_developer"
+        type="radio"
+        value="+5"
+      />
+      <label
+        for="+5 years"
+      >
+        +5 years
+      </label>
+    </div>
+    <div>
       <input
         id="I agree"
         name="agree"
@@ -53,6 +89,12 @@ exports[`Fields Should submit correctly 1`] = `
         type="checkbox"
         value="true"
       />
+      <label
+        for="I agree"
+      >
+        I agree
+        *
+      </label>
     </div>
     <div>
       <label

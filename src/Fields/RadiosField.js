@@ -5,7 +5,7 @@ import Wrapper from './Wrapper'
 
 const RadiosField = ({ label, options, error, ...input }) => {
   const [checkedItem, setCheckedItem] = useState(
-    options.find(item => item.checked).value
+    (options.find(item => item.checked) || {}).value
   )
 
   const handleClick = value => {
