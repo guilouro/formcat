@@ -153,7 +153,7 @@ We can set values out of Form using `Ref` and `updateFieldValue` as the example 
 
 | Param | Type | Description |
 | ----- | ---- | ------------- |
-| **name** | String  | Field name |
+| **name** | String | `null`  | Field name |
 | **text** | String  | A new value for this field |
 
 ```js
@@ -207,10 +207,62 @@ import { InputField } from 'formcat/Fields'
 
 | Param | Type | Default value | Description |
 | ----- | ---- | ------------- | --------------|
+| **name** | String | `null`  | Field name |
 | **label** | String  | `''` | A label for this field |
-| **type** | String  | `text` | A label for this field |
+| **type** | String  | `text` | A type for this input |
 
 *Obs: And all common props*
+
+### CheckboxField
+
+A `input` `checkbox` field
+
+```js
+import { CheckboxField } from 'formcat/Fields'
+
+...
+<CheckboxField
+  label="My Input"
+  name="my-select"
+/>
+...
+```
+
+| Param | Type | Default value | Description |
+| ----- | ---- | ------------- | --------------|
+| **name** | String | `null`  | Field name |
+| **label** | String  | `''` | A label for this field |
+| **defaultChecked** | Boolean  | `false` | A flag to define the initial status |
+
+*Obs: And all common props*
+
+### RadiosField
+
+A simple `input` `radio` field
+
+```js
+import { RadiosField } from 'formcat/Fields'
+
+...
+<RadiosField
+  label="My Select"
+  name="my-select"
+  options={[
+    { label: 'Item 1', value: 1 },
+    { label: 'Item 2', value: 2, checked: true }
+  ]}
+/>
+...
+```
+
+| Param | Type | Default value | Description |
+| ----- | ---- | ------------- | --------------|
+| **name** | String | `null`  | Field name |
+| **label** | String  | `''` | A label for this field |
+| **options** | Array  | `[]` | A list of objects with `label`, `value` and `checked` |
+
+*Obs: And all common props*
+
 
 ### SelectField
 
@@ -232,6 +284,7 @@ import { SelectField } from 'formcat/Fields'
 
 | Param | Type | Default value | Description |
 | ----- | ---- | ------------- | --------------|
+| **name** | String | `null`  | Field name |
 | **label** | String  | `''` | A label for this field |
 | **options** | Array  | `[]` | A list of objects with `label` and `value` |
 
@@ -254,9 +307,15 @@ import { TextareaField } from 'formcat/Fields'
 
 | Param | Type | Default value | Description |
 | ----- | ---- | ------------- | --------------|
+| **name** | String | `null`  | Field name |
 | **label** | String  | `''` | A label for this field |
 
 *Obs: And all common props*
+
+### Error styles
+
+Invalid fields will receive a class: `className="formcat-error"`
+
 
 
 ## Contributing
