@@ -1,9 +1,13 @@
 import React from 'react'
 import { render } from 'react-dom'
-import Main from './components/main'
+import Main from './main'
+import GlobalStyle from './global.styles'
 
 const App = () => (
-  <Main />
+  <>
+    <GlobalStyle />
+    <Main />
+  </>
 )
 
 render(<App />, document.getElementById('main'))
