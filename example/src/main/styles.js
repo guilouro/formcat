@@ -11,13 +11,15 @@ export const Container = styled.section`
 `
 
 export const Grid = styled.main`
-  /* max-width: 1024px; */
+  width: 100%;
+  max-width: 1690px;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  background-color: #f7f3f3;
 `
 
 export const FormContainer = styled.div`
-  padding: 0 20%;
+  padding: 10%;
   label {
     width: 100%;
     font-size: 14px;
@@ -25,7 +27,12 @@ export const FormContainer = styled.div`
   }
 `
 
-export const Code = styled.div``
+export const Code = styled.pre`
+  background: #eee;
+  font-size: 12px;
+  padding: 5px;
+  white-space: pre-wrap;
+`
 
 export const Field = styled.article`
   margin-bottom: 15px;
