@@ -17,6 +17,7 @@ const withContextForm = WrapperComponent => {
         PropTypes.number,
         PropTypes.bool
       ]),
+      defaultChecked: PropTypes.bool,
       required: PropTypes.bool,
       validations: PropTypes.arrayOf(PropTypes.func)
     }
@@ -27,6 +28,7 @@ const withContextForm = WrapperComponent => {
       onFocus: undefined,
       onChange: undefined,
       defaultValue: '',
+      defaultChecked: false,
       required: false,
       validations: []
     }
@@ -35,7 +37,12 @@ const withContextForm = WrapperComponent => {
       this.props.context.onRegister(
         this.props.name,
         'value',
-        this.props.defaultValue
+        this.props.defaultValue || (this.props.defaultChecked || '')
+      )
+      this.props.context.onRegister(
+        this.props.name,
+        'checked',
+        this.props.defaultChecked
       )
       this.props.context.onRegister(
         this.props.name,
@@ -81,9 +88,22 @@ const withContextForm = WrapperComponent => {
     }
 
     render() {
-      const { context, validations, defaultValue, ...props } = this.props
+      const {
+        context,
+        validations,
+        defaultValue,
+        defaultChecked,
+        ...props
+      } = this.props
 
       const value = get(context.registeredFields[props.name], 'value', '')
+
+      const checked = get(
+        context.registeredFields[props.name],
+        'checked',
+        false
+      )
+
       const error = get(context.registeredFields[props.name], 'error', false)
 
       return (
@@ -92,6 +112,7 @@ const withContextForm = WrapperComponent => {
             {...props}
             value={value}
             error={error}
+            checked={checked}
             onChange={this.handleChange}
             onFocus={this.handleFocus}
             onBlur={this.handleBlur}

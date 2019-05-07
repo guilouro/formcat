@@ -64,7 +64,7 @@ describe('<Form />', () => {
       </Form>
     )
 
-    expect(container.querySelector('input[name="Lorem"]').value).toBe('')
+    expect(container.querySelector('input[name="Lorem"]').value).toBe('true')
     expect(container.querySelector('input[name="Lorem"]').checked).toBe(true)
   })
 
@@ -310,6 +310,7 @@ describe('<Form />', () => {
       error: false,
       field: {
         Lorem: {
+          checked: false,
           active: false,
           error: false,
           required: false,
@@ -345,6 +346,7 @@ describe('<Form />', () => {
       error: true,
       field: {
         Lorem: {
+          checked: false,
           active: false,
           error: true,
           required: true,
@@ -412,6 +414,30 @@ describe('<Form />', () => {
       expect(onFormChange).toBeCalledWith({
         name: 'Lorem',
         type: 'active',
+        value: true
+      })
+    })
+
+    it('Should called with onChange and type is checkbox', () => {
+      const { container } = render(
+        <Form onFormChange={onFormChange}>
+          <SimpleField name="Lorem" type="checkbox" />
+        </Form>
+      )
+
+      onFormChange.mockRestore()
+      const input = container.querySelector('input[name="Lorem"]')
+
+      // On Change
+      fireEvent.click(input)
+      expect(onFormChange).toBeCalledWith({
+        name: 'Lorem',
+        type: 'value',
+        value: true
+      })
+      expect(onFormChange).toBeCalledWith({
+        name: 'Lorem',
+        type: 'checked',
         value: true
       })
     })

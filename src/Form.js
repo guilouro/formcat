@@ -85,8 +85,12 @@ class Form extends PureComponent {
 
   handleChange = e => {
     const { name, type } = e.target
-    const value = type === 'checkbox' ? e.target.checked : e.target.value
-    this.registerUpdate(name, 'value', value)
+    if (type === 'checkbox') {
+      this.registerUpdate(name, 'value', e.target.checked)
+      this.registerUpdate(name, 'checked', e.target.checked)
+      return
+    }
+    this.registerUpdate(name, 'value', e.target.value)
   }
 
   handleBlur = e => {
