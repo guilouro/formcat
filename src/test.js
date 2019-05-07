@@ -269,6 +269,32 @@ describe('<Form />', () => {
     expect(getByText(/Submit/g).hasAttribute('disabled')).toBeTruthy()
   })
 
+  it('Should disabled Submit if started with a invalid field', () => {
+    const { getByText } = render(
+      <Form>
+        <SimpleField name="Lorem" required />
+        <Submit>Submit</Submit>
+      </Form>
+    )
+
+    expect(getByText(/Submit/g).hasAttribute('disabled')).toBeTruthy()
+  })
+
+  it('Should enabled Submit if started with a valid field', () => {
+    const { container, getByText } = render(
+      <Form>
+        <SimpleField name="Lorem" required />
+        <Submit>Submit</Submit>
+      </Form>
+    )
+
+    fireEvent.change(container.querySelector('input[name="Lorem"'), {
+      target: { value: 'any' }
+    })
+
+    expect(getByText(/Submit/g).hasAttribute('disabled')).toBeFalsy()
+  })
+
   it('Should set value using updateFieldValue', () => {
     const WithRef = () => {
       const form = useRef(null)
