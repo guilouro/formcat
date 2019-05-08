@@ -1,13 +1,15 @@
 {
   "name": "formcat",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple and easy way to control forms in React using the React Context API",
   "main": "lib/index.js",
   "scripts": {
     "start": "webpack-dev-server",
     "lint": "eslint src",
     "test": "NODE_ENV=test jest",
-    "build:lib": "babel src --out-dir lib --ignore \"src/**/test.js\""
+    "ci": "npm run lint && npm t",
+    "build:lib": "babel src --out-dir lib --ignore \"src/**/test.js\"",
+    "prepublish": "npm run ci && npm run build:lib"
   },
   "author": "Guilherme Louro (http://github.com/guilouro)",
   "license": "MIT",
@@ -66,7 +68,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-push": "npm run lint && npm t"
+      "pre-push": "npm run ci"
     }
   }
 }
