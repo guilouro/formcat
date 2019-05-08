@@ -317,6 +317,21 @@ import { TextareaField } from 'formcat/fields'
 Invalid fields will receive a class: `className="formcat-error"`
 
 
+## Examples
+
+### Full form
+
+A example with all fields, validation and a populate button
+
+[![Edit Formcat](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/93465kmow?fontsize=14)
+
+### Creating a custom fields
+
+A example of the how create a custom field
+
+[![Edit Creating custom fields](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/3rpxomlm15?fontsize=14)
+
+---
 
 ## Contributing
 
