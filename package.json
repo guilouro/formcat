@@ -2,7 +2,7 @@
   "name": "formcat",
   "version": "1.0.0",
   "description": "A simple and easy way to control forms in React using the React Context API",
-  "main": "src/index.js",
+  "main": "lib/index.js",
   "scripts": {
     "start": "webpack-dev-server",
     "lint": "eslint src",
@@ -15,8 +15,13 @@
     "react",
     "reactjs",
     "context",
+    "hooks",
     "form"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guilouro/formcat.git"
+  },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.2.2",
