@@ -10,9 +10,9 @@
     "ci": "npm run lint && npm t",
     "build:lib": "babel src -d lib --ignore \"src/**/test.js\"",
     "copy:lib": "cp package.json README.md lib",
+    "clear:lib": "rm -rf lib",
     "prepare": "[[ \"$PWD\" =~ lib ]]",
-    "pub": "pushd . && npm run ci && npm run build:lib && npm run copy:lib && cd lib && npm publish && popd",
-    "postpublish": "rm -rf lib"
+    "pub": "pushd ./ && npm run ci && npm run build:lib && npm run copy:lib && cd lib && npm publish && popd && npm run clear:lib"
   },
   "author": "Guilherme Louro (http://github.com/guilouro)",
   "license": "MIT",
