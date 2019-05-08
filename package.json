@@ -7,8 +7,7 @@
     "start": "webpack-dev-server",
     "lint": "eslint src",
     "test": "NODE_ENV=test jest",
-    "build:lib": "babel src --out-dir lib --ignore \"src/**/test.js\"",
-    "prepush": "npm run lint && npm t"
+    "build:lib": "babel src --out-dir lib --ignore \"src/**/test.js\""
   },
   "author": "Guilherme Louro (http://github.com/guilouro)",
   "license": "MIT",
@@ -59,5 +58,10 @@
   "peerDependencies": {
     "react": "^16.8.x",
     "react-dom": "^16.8.x"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "npm run lint && npm t"
+    }
   }
 }
