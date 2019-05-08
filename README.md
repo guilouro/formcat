@@ -195,7 +195,7 @@ There are some simple field created with `withContexForm` we can use in project 
 A simple `input` field
 
 ```js
-import { InputField } from 'formcat/Fields'
+import { InputField } from 'formcat/fields'
 
 ...
 <InputField
@@ -218,7 +218,7 @@ import { InputField } from 'formcat/Fields'
 A `input` `checkbox` field
 
 ```js
-import { CheckboxField } from 'formcat/Fields'
+import { CheckboxField } from 'formcat/fields'
 
 ...
 <CheckboxField
@@ -241,7 +241,7 @@ import { CheckboxField } from 'formcat/Fields'
 A simple `input` `radio` field
 
 ```js
-import { RadiosField } from 'formcat/Fields'
+import { RadiosField } from 'formcat/fields'
 
 ...
 <RadiosField
@@ -269,7 +269,7 @@ import { RadiosField } from 'formcat/Fields'
 A simple `select` field
 
 ```js
-import { SelectField } from 'formcat/Fields'
+import { SelectField } from 'formcat/fields'
 
 ...
 <SelectField
@@ -295,7 +295,7 @@ import { SelectField } from 'formcat/Fields'
 A simple `textarea` field
 
 ```js
-import { TextareaField } from 'formcat/Fields'
+import { TextareaField } from 'formcat/fields'
 
 ...
 <TextareaField

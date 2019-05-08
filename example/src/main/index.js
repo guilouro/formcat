@@ -9,7 +9,7 @@ import {
   SelectField,
   RadiosField,
   CheckboxField
-} from '../../../src/Fields'
+} from '../../../src/fields'
 import PrintCode from '../print-code'
 
 export default function Main() {
@@ -47,7 +47,7 @@ import {
   SelectField,
   RadiosField,
   CheckboxField
-} from 'formcat/Fields'
+} from 'formcat/fields'
 
 ...
 return (
