@@ -30,7 +30,7 @@ const mockResponse = {
     agree: { checked: true, required: true, value: true },
     first_name: { checked: false, required: false, value: 'Guilherme Louro' },
     gender: { checked: false, required: false, value: 'Male' },
-    time_as_developer: { checked: false, required: false, value: '3-5' },
+    time_as_developer: { checked: false, required: true, value: '3-5' },
     message: {
       checked: false,
       required: false,
@@ -40,6 +40,20 @@ const mockResponse = {
 }
 
 describe('Fields', () => {
+  it('Should set class error if not valid', () => {
+    const { container } = render(
+      <Form>
+        <InputField label="First Name" name="first_name" required />
+      </Form>
+    )
+
+    const input = container.querySelector('input[name="first_name"]')
+    fireEvent.change(input)
+    fireEvent.blur(input)
+
+    expect(input.getAttribute('class')).toBe('formcat-error')
+  })
+
   it('Should submit correctly', done => {
     const onSubmit = jest.fn()
     const { container, getByText } = render(
@@ -57,6 +71,7 @@ describe('Fields', () => {
         <RadiosField
           label="How many time do you work as developer?"
           name="time_as_developer"
+          required
           options={[
             { label: '1 - 3 years', value: '1-3' },
             { label: '3 - 5 years', value: '3-5' },
