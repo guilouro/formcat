@@ -2,7 +2,7 @@ import React, { useRef } from 'react'
 import { render, cleanup, fireEvent } from 'react-testing-library'
 import { Form, withContextForm, withSubmit } from '.'
 
-jest.mock('lodash/debounce', () =>
+jest.mock('lodash.debounce', () =>
   jest.fn(fn => {
     fn.cancel = jest.fn()
     return fn

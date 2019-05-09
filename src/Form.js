@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import debounce from 'lodash/debounce'
+import debounce from 'lodash.debounce'
 import { Provider } from './create'
 import PropTypes from 'prop-types'
 

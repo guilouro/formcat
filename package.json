@@ -1,6 +1,6 @@
 {
   "name": "formcat",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "description": "A simple and easy way to control forms in React using the React Context API",
   "main": "index.js",
   "scripts": {
@@ -58,8 +58,8 @@
     "webpack-dev-server": "^3.1.14"
   },
   "dependencies": {
-    "@babel/runtime": "^7.4.4",
-    "lodash": "^4.17.11",
+    "lodash.debounce": "^4.0.8",
+    "lodash.get": "^4.4.2",
     "prop-types": "^15.7.2",
     "react": "^16.8.5",
     "react-dom": "^16.8.5"
