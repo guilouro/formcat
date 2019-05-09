@@ -410,7 +410,6 @@ describe('<Form />', () => {
     })
 
     it('Should called with onChange', () => {
-      // On Change
       fireEvent.change(input, { target: { value: 'any' } })
       expect(onFormChange).toBeCalledWith({
         name: 'Lorem',
@@ -420,7 +419,6 @@ describe('<Form />', () => {
     })
 
     it('Should called with onBlur', () => {
-      // On Bur
       fireEvent.blur(input)
       expect(onFormChange).toBeCalledWith({
         name: 'Lorem',
@@ -435,7 +433,6 @@ describe('<Form />', () => {
     })
 
     it('Should called with onFocus', () => {
-      // On Focus
       fireEvent.focus(input)
       expect(onFormChange).toBeCalledWith({
         name: 'Lorem',
@@ -454,7 +451,6 @@ describe('<Form />', () => {
       onFormChange.mockRestore()
       const input = container.querySelector('input[name="Lorem"]')
 
-      // On Change
       fireEvent.click(input)
       expect(onFormChange).toBeCalledWith({
         name: 'Lorem',
