@@ -1,7 +1,7 @@
 import { createContext } from 'react'
 
 const FormContext = createContext({
-  registeredFields: {},
+  fields: {},
   isValid: true,
   onRegister: undefined,
   onChange: undefined,

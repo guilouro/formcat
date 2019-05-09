@@ -96,15 +96,11 @@ const withContextForm = WrapperComponent => {
         ...props
       } = this.props
 
-      const value = get(context.registeredFields[props.name], 'value', '')
+      const value = get(context.fields[props.name], 'value', '')
 
-      const checked = get(
-        context.registeredFields[props.name],
-        'checked',
-        false
-      )
+      const checked = get(context.fields[props.name], 'checked', false)
 
-      const error = get(context.registeredFields[props.name], 'error', false)
+      const error = get(context.fields[props.name], 'error', false)
 
       return (
         <React.Fragment>
@@ -126,7 +122,7 @@ const withContextForm = WrapperComponent => {
   return props => (
     <Consumer>
       {({
-        registeredFields,
+        fields,
         onRegister,
         unRegister,
         onChange,
@@ -137,7 +133,7 @@ const withContextForm = WrapperComponent => {
         <Field
           {...props}
           context={{
-            registeredFields,
+            fields,
             onRegister,
             unRegister,
             onChange,

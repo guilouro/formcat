@@ -18,7 +18,7 @@ class Form extends PureComponent {
   }
 
   state = {
-    registeredFields: {},
+    fields: {},
     isValid: true
   }
 
@@ -32,9 +32,9 @@ class Form extends PureComponent {
 
     const data = {}
     const field = {}
-    Object.keys(this.state.registeredFields).forEach(key => {
-      const { validations, ...rest } = this.state.registeredFields[key]
-      data[key] = this.state.registeredFields[key].value
+    Object.keys(this.state.fields).forEach(key => {
+      const { validations, ...rest } = this.state.fields[key]
+      data[key] = this.state.fields[key].value
       field[key] = { ...rest }
     })
 
@@ -57,30 +57,28 @@ class Form extends PureComponent {
 
   onKeyUp = debounce(e => {
     const { name, value } = e.target
-    if (this.state.registeredFields[name].touched) {
+    if (this.state.fields[name].touched) {
       this.doValidate(name, value)
     }
   }, 250)
 
   unRegister = name => {
-    const { registeredFields } = this.state
-    delete registeredFields[name]
-    this.setState({ registeredFields })
+    const { fields } = this.state
+    delete fields[name]
+    this.setState({ fields })
   }
 
   hasError = async () => {
-    const { registeredFields } = this.state
-    const fields = Object.keys(registeredFields).filter(
-      name => registeredFields[name].validations.length
+    const { fields } = this.state
+    const listFields = Object.keys(fields).filter(
+      name => fields[name].validations.length
     )
 
     await Promise.all(
-      fields.map(name => this.doValidate(name, registeredFields[name].value))
+      listFields.map(name => this.doValidate(name, fields[name].value))
     )
 
-    return !fields.every(
-      name => this.state.registeredFields[name].error === false
-    )
+    return !listFields.every(name => this.state.fields[name].error === false)
   }
 
   handleChange = e => {
@@ -113,10 +111,10 @@ class Form extends PureComponent {
   }
 
   isValidField = (name, value) => {
-    const { validations, required } = this.state.registeredFields[name]
-    const { registeredFields } = this.state
+    const { validations, required } = this.state.fields[name]
+    const { fields } = this.state
     return validations.every(
-      func => (value === '' && !required) || func(value, registeredFields)
+      func => (value === '' && !required) || func(value, fields)
     )
   }
 
@@ -129,12 +127,12 @@ class Form extends PureComponent {
   }
 
   validateForm = debounce(() => {
-    const fields = Object.keys(this.state.registeredFields).filter(
-      name => this.state.registeredFields[name].validations.length
+    const listFields = Object.keys(this.state.fields).filter(
+      name => this.state.fields[name].validations.length
     )
 
-    const isValid = fields.every(name => {
-      const { value } = this.state.registeredFields[name]
+    const isValid = listFields.every(name => {
+      const { value } = this.state.fields[name]
       return this.isValidField(name, value)
     })
 
@@ -151,10 +149,10 @@ class Form extends PureComponent {
     new Promise(resolve => {
       this.setState(
         prevState => ({
-          registeredFields: {
-            ...prevState.registeredFields,
+          fields: {
+            ...prevState.fields,
             [name]: {
-              ...prevState.registeredFields[name],
+              ...prevState.fields[name],
               [type]: value
             }
           }
@@ -171,7 +169,7 @@ class Form extends PureComponent {
     return (
       <Provider
         value={{
-          registeredFields: this.state.registeredFields,
+          fields: this.state.fields,
           isValid: this.state.isValid,
           onRegister: this.onRegister,
           unRegister: this.unRegister,
