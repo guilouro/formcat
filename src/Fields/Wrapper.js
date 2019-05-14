@@ -11,7 +11,7 @@ const Wrapper = ({ label, required, children, error, reverse }) => {
       {reverse && clone}
       <label htmlFor={label}>
         {label}
-        {required && !reverse && ' *'}
+        {required && !reverse && label && ' *'}
       </label>
       {!reverse && clone}
     </div>
