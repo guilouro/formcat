@@ -8,18 +8,21 @@ class Form extends PureComponent {
     onSubmit: PropTypes.func,
     onFormChange: PropTypes.func,
     children: PropTypes.any.isRequired,
-    keyUpValidation: PropTypes.bool
+    keyUpValidation: PropTypes.bool,
+    clearAfterSubmit: PropTypes.bool
   }
 
   static defaultProps = {
     onSubmit: undefined,
     onFormChange: undefined,
-    keyUpValidation: false
+    keyUpValidation: false,
+    clearAfterSubmit: false
   }
 
   state = {
     fields: {},
-    isValid: true
+    isValid: true,
+    initialData: {}
   }
 
   componentWillUnmount() {
@@ -43,6 +46,14 @@ class Form extends PureComponent {
       data,
       field
     })
+
+    if (this.props.clearAfterSubmit) {
+      this.resetForm()
+    }
+  }
+
+  resetForm = () => {
+    this.setState({ fields: this.state.initialData })
   }
 
   onFormChange = ({ name, type, value }) => {
@@ -51,8 +62,9 @@ class Form extends PureComponent {
     }
   }
 
-  onRegister = (name, type, value) => {
-    this.registerUpdate(name, type, value)
+  onRegister = async (name, type, value) => {
+    await this.registerUpdate(name, type, value)
+    this.setState({ initialData: this.state.fields })
   }
 
   onKeyUp = debounce(e => {

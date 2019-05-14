@@ -1,5 +1,10 @@
 import React, { useRef } from 'react'
-import { render, cleanup, fireEvent } from 'react-testing-library'
+import {
+  render,
+  cleanup,
+  fireEvent,
+  waitForElement
+} from 'react-testing-library'
 import { Form, withContextForm, withSubmit } from '.'
 
 jest.mock('lodash.debounce', () =>
@@ -254,6 +259,29 @@ describe('<Form />', () => {
 
     setImmediate(() => {
       expect(onSubmit).toBeCalled()
+      done()
+    })
+  })
+
+  it('Should reset Form after submit', async done => {
+    const { container, getByText } = render(
+      <Form clearAfterSubmit onSubmit={jest.fn()}>
+        <SimpleField name="Lorem" />
+        <Submit>Submit</Submit>
+      </Form>
+    )
+
+    const input = await waitForElement(() => {
+      return container.querySelector('input')
+    })
+
+    fireEvent.change(input, { target: { value: 'Lorem Ipsum' } })
+
+    expect(input.value).toBe('Lorem Ipsum')
+    fireEvent.click(getByText(/Submit/g))
+
+    setImmediate(() => {
+      expect(input.value).toBe('')
       done()
     })
   })

@@ -97,7 +97,7 @@ return (
         </PrintCode>
 
         <S.FormContainer>
-          <Form keyUpValidation onSubmit={onSubmit} ref={form}>
+          <Form keyUpValidation clearAfterSubmit onSubmit={onSubmit} ref={form}>
             <S.Field>
               <InputField label="First Name" name="first_name" required />
             </S.Field>

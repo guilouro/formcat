@@ -62,6 +62,7 @@ function Main () {
 | Props | Type | Default value | Description |
 | ----- | ---- | ------------- | ----------- |
 | **keyUpValidation** | Boolean | `false` | When `true` the validations Field works with `keyUp` |
+| **clearAfterSubmit** | Boolean | `false` | When `true` the form will be reset after submit |
 | **onFormChange** | Function | `undefined` | A callback that returns an object with `name`, `type` and `value`<br> of the current change.  |
 | **onSubmit** | Function | `undefined` | A callback that returns an object with status and values.  |
 
