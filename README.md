@@ -4,6 +4,7 @@ A simple and easy way to control forms in React using the [React Context API](ht
 
 
 [![Build Status](https://travis-ci.com/guilouro/formcat.svg?token=ypLGJBT7BX8hXAJnirC4&branch=master)](https://travis-ci.com/guilouro/formcat)
+[![codecov.io](https://codecov.io/gh/guilouro/formcat/branch/master/graph/badge.svg)](https://codecov.io/gh/guilouro/formcat)
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 
 
