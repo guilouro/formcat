@@ -54,6 +54,18 @@ describe('Fields', () => {
     expect(input.getAttribute('class')).toBe('formcat-error')
   })
 
+  it('Should not set id when label is empty', () => {
+    const { container } = render(
+      <Form>
+        <InputField name="first_name" required />
+      </Form>
+    )
+
+    expect(
+      container.querySelector('input[name="first_name"]').hasAttribute('id')
+    ).toBeFalsy()
+  })
+
   it('Should submit correctly', done => {
     const onSubmit = jest.fn()
     const { container, getByText } = render(

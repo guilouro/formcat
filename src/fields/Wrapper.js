@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 const Wrapper = ({ label, required, children, error, reverse }) => {
   const clone = React.cloneElement(children, {
-    id: label,
+    ...(!!label && { id: label }),
     className: error ? 'formcat-error' : ''
   })
   return (
