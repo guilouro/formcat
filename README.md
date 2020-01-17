@@ -44,7 +44,7 @@ export default withContextForm(InputField)
 Now we can use this component inside the Form:
 
 ```js
-import { Form } from 'react-contex-form'
+import { Form } from 'formcat'
 import InputField from './InputField'
 
 function Main () {
