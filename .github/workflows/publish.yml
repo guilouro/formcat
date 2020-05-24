@@ -11,10 +11,13 @@ jobs:
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - uses: MontyD/package-json-updated-action
+      - name: Package Version Updated
+        uses: MontyD/package-json-updated-action@1.0.1
         id: version-updated
         with:
           path: package.json
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: actions/checkout@v1
 
