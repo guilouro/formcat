@@ -1,10 +1,5 @@
 import React, { useRef } from 'react'
-import {
-  render,
-  cleanup,
-  fireEvent,
-  waitForElement
-} from '@testing-library/react'
+import { render, cleanup, fireEvent, screen } from '@testing-library/react'
 import { Form, withContextForm, withSubmit } from '.'
 
 jest.mock('lodash.debounce', () =>
@@ -248,14 +243,14 @@ describe('<Form />', () => {
 
   it('Should call onSubmit', (done) => {
     const onSubmit = jest.fn()
-    const { getByText } = render(
+    render(
       <Form onSubmit={onSubmit}>
         <SimpleField name="Lorem" />
         <Submit>Submit</Submit>
       </Form>
     )
 
-    fireEvent.click(getByText(/Submit/g))
+    fireEvent.click(screen.getByText(/Submit/g))
 
     setImmediate(() => {
       expect(onSubmit).toBeCalled()
@@ -264,21 +259,19 @@ describe('<Form />', () => {
   })
 
   it('Should reset Form after submit', async (done) => {
-    const { container, getByText } = render(
+    render(
       <Form clearAfterSubmit onSubmit={jest.fn()}>
-        <SimpleField name="Lorem" />
+        <SimpleField data-testid="input-lorem" name="Lorem" />
         <Submit>Submit</Submit>
       </Form>
     )
 
-    const input = await waitForElement(() => {
-      return container.querySelector('input')
-    })
+    const input = await screen.findByTestId('input-lorem')
 
     fireEvent.change(input, { target: { value: 'Lorem Ipsum' } })
 
     expect(input.value).toBe('Lorem Ipsum')
-    fireEvent.click(getByText(/Submit/g))
+    fireEvent.click(screen.getByText(/Submit/g))
 
     setImmediate(() => {
       expect(input.value).toBe('')
@@ -287,29 +280,29 @@ describe('<Form />', () => {
   })
 
   it('Should disabled Submit when Form is not valid', () => {
-    const { getByText } = render(
+    render(
       <Form>
         <SimpleField name="Lorem" required />
         <Submit>Submit</Submit>
       </Form>
     )
 
-    expect(getByText(/Submit/g).hasAttribute('disabled')).toBeTruthy()
+    expect(screen.getByText(/Submit/g).hasAttribute('disabled')).toBeTruthy()
   })
 
   it('Should disabled Submit if started with a invalid field', () => {
-    const { getByText } = render(
+    render(
       <Form>
         <SimpleField name="Lorem" required />
         <Submit>Submit</Submit>
       </Form>
     )
 
-    expect(getByText(/Submit/g).hasAttribute('disabled')).toBeTruthy()
+    expect(screen.getByText(/Submit/g).hasAttribute('disabled')).toBeTruthy()
   })
 
   it('Should enabled Submit if started with a valid field', () => {
-    const { container, getByText } = render(
+    const { container } = render(
       <Form>
         <SimpleField name="Lorem" required />
         <Submit>Submit</Submit>
@@ -320,7 +313,7 @@ describe('<Form />', () => {
       target: { value: 'any' }
     })
 
-    expect(getByText(/Submit/g).hasAttribute('disabled')).toBeFalsy()
+    expect(screen.getByText(/Submit/g).hasAttribute('disabled')).toBeFalsy()
   })
 
   it('Should set value using updateFieldValue', () => {
@@ -339,8 +332,8 @@ describe('<Form />', () => {
       )
     }
 
-    const { container, getByText } = render(<WithRef />)
-    fireEvent.click(getByText(/Change/g))
+    const { container } = render(<WithRef />)
+    fireEvent.click(screen.getByText(/Change/g))
     expect(container.querySelector('input[name="Lorem"]').value).toBe(
       '@guilouro'
     )
@@ -348,7 +341,7 @@ describe('<Form />', () => {
 
   it('Should return field values with onSubmit', (done) => {
     const onSubmit = jest.fn()
-    const { container, getByText } = render(
+    const { container } = render(
       <Form onSubmit={onSubmit}>
         <SimpleField name="Lorem" />
         <Submit>Submit</Submit>
@@ -374,7 +367,7 @@ describe('<Form />', () => {
       }
     }
 
-    fireEvent.click(getByText(/Submit/g))
+    fireEvent.click(screen.getByText(/Submit/g))
 
     setImmediate(() => {
       expect(onSubmit).toBeCalledWith(expectData)
@@ -384,7 +377,7 @@ describe('<Form />', () => {
 
   it('Should return error when form is not valid', (done) => {
     const onSubmit = jest.fn()
-    const { container, getByText } = render(
+    const { container } = render(
       <Form onSubmit={onSubmit}>
         <SimpleField name="Lorem" required />
         <button>Submit</button>
@@ -410,7 +403,7 @@ describe('<Form />', () => {
       }
     }
 
-    fireEvent.click(getByText(/Submit/g))
+    fireEvent.click(screen.getByText(/Submit/g))
 
     setImmediate(() => {
       expect(onSubmit).toBeCalledWith(expectData)
