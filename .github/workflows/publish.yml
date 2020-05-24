@@ -11,21 +11,30 @@ jobs:
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
+      - uses: MontyD/package-json-updated-action
+        id: version-updated
+        with:
+          path: package.json
+
       - uses: actions/checkout@v1
+
       - uses: actions/setup-node@v1
         with:
           node-version: 10.x
           registry-url: 'https://registry.npmjs.org'
 
       - name: Install packages
+        if: steps.version-updated.outputs.has-updated
         run: npm install
 
       - name: Publish
+        if: steps.version-updated.outputs.has-updated
         run: npm run pub
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Push tags
+        if: steps.version-updated.outputs.has-updated
         uses: ad-m/github-push-action@master
         with:
           tags: true
