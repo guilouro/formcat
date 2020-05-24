@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, fireEvent } from 'react-testing-library'
+import { render, fireEvent, screen } from '@testing-library/react'
 import { Form } from '..'
 import {
   InputField,
@@ -11,7 +11,7 @@ import {
 } from '.'
 
 jest.mock('lodash.debounce', () =>
-  jest.fn(fn => {
+  jest.fn((fn) => {
     fn.cancel = jest.fn()
     return fn
   })
@@ -66,9 +66,9 @@ describe('Fields', () => {
     ).toBeFalsy()
   })
 
-  it('Should submit correctly', done => {
+  it('Should submit correctly', (done) => {
     const onSubmit = jest.fn()
-    const { container, getByText } = render(
+    const { container } = render(
       <Form onSubmit={onSubmit}>
         <InputField label="First Name" name="first_name" />
         <SelectField
@@ -117,7 +117,7 @@ describe('Fields', () => {
       target: { value: mockResponse.field.message.value }
     })
 
-    fireEvent.click(getByText(/Submit/g))
+    fireEvent.click(screen.getByText(/Submit/g))
 
     setImmediate(() => {
       expect(onSubmit).toBeCalledWith(mockResponse)

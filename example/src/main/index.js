@@ -20,7 +20,7 @@ export default function Main() {
     setSubmitData(JSON.stringify(data, undefined, 2))
   }
 
-  const onPopulate = e => {
+  const onPopulate = (e) => {
     e.preventDefault()
     form.current.updateFieldValue('first_name', faker.name.firstName())
     form.current.updateFieldValue('last_name', faker.name.lastName())
