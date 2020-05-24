@@ -24,5 +24,5 @@ jobs:
         run: yarn test
 
       - name: Send Coverage
-      - uses: codecov/codecov-action@v1
+        uses: codecov/codecov-action@v1
 
