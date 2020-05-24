@@ -11,7 +11,7 @@
     "build:lib": "babel src -d lib --ignore \"src/**/test.js\"",
     "copy:lib": "cp package.json README.md lib",
     "clear:lib": "rm -rf lib",
-    "pub": "pushd ./ && npm run ci && npm run build:lib && npm run copy:lib && cd lib && npm publish && popd && npm run clear:lib",
+    "pub": "npm run ci && npm run build:lib && npm run copy:lib && cd lib && npm publish",
     "postpublish": "PACKAGE_VERSION=$(cat package.json | grep \\\"version\\\" | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]') && git tag v$PACKAGE_VERSION && git tag"
   },
   "author": "Guilherme Louro (http://github.com/guilouro)",
