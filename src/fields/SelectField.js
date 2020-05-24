@@ -6,7 +6,7 @@ import Wrapper from './Wrapper'
 const SelectField = ({ label, error, options, ...input }) => (
   <Wrapper label={label} error={error} {...input}>
     <select {...input}>
-      {options.map(item => (
+      {options.map((item) => (
         <option key={item.value} value={item.value}>
           {item.label}
         </option>

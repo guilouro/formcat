@@ -30,12 +30,12 @@ class Form extends PureComponent {
     this.onKeyUp.cancel()
   }
 
-  onSubmit = async e => {
+  onSubmit = async (e) => {
     e.preventDefault()
 
     const data = {}
     const field = {}
-    Object.keys(this.state.fields).forEach(key => {
+    Object.keys(this.state.fields).forEach((key) => {
       const { validations, ...rest } = this.state.fields[key]
       data[key] = this.state.fields[key].value
       field[key] = { ...rest }
@@ -67,14 +67,14 @@ class Form extends PureComponent {
     this.setState({ initialData: this.state.fields })
   }
 
-  onKeyUp = debounce(e => {
+  onKeyUp = debounce((e) => {
     const { name, value } = e.target
     if (this.state.fields[name].touched) {
       this.doValidate(name, value)
     }
   }, 250)
 
-  unRegister = name => {
+  unRegister = (name) => {
     const { fields } = this.state
     delete fields[name]
     this.setState({ fields })
@@ -83,17 +83,17 @@ class Form extends PureComponent {
   hasError = async () => {
     const { fields } = this.state
     const listFields = Object.keys(fields).filter(
-      name => fields[name].validations.length
+      (name) => fields[name].validations.length
     )
 
     await Promise.all(
-      listFields.map(name => this.doValidate(name, fields[name].value))
+      listFields.map((name) => this.doValidate(name, fields[name].value))
     )
 
-    return !listFields.every(name => this.state.fields[name].error === false)
+    return !listFields.every((name) => this.state.fields[name].error === false)
   }
 
-  handleChange = e => {
+  handleChange = (e) => {
     const { name, type } = e.target
     if (type === 'checkbox') {
       this.registerUpdate(name, 'value', e.target.checked)
@@ -103,21 +103,21 @@ class Form extends PureComponent {
     this.registerUpdate(name, 'value', e.target.value)
   }
 
-  handleBlur = e => {
+  handleBlur = (e) => {
     const { name, value } = e.target
     this.registerUpdate(name, 'active', false)
     this.registerUpdate(name, 'touched', true)
     this.doValidate(name, value)
   }
 
-  handleKeyUp = e => {
+  handleKeyUp = (e) => {
     if (!this.props.keyUpValidation) return
 
     e.persist()
     this.onKeyUp(e)
   }
 
-  handleFocus = e => {
+  handleFocus = (e) => {
     const { name } = e.target
     this.registerUpdate(name, 'active', true)
   }
@@ -126,7 +126,7 @@ class Form extends PureComponent {
     const { validations, required } = this.state.fields[name]
     const { fields } = this.state
     return validations.every(
-      func => (value === '' && !required) || func(value, fields)
+      (func) => (value === '' && !required) || func(value, fields)
     )
   }
 
@@ -140,10 +140,10 @@ class Form extends PureComponent {
 
   validateForm = debounce(() => {
     const listFields = Object.keys(this.state.fields).filter(
-      name => this.state.fields[name].validations.length
+      (name) => this.state.fields[name].validations.length
     )
 
-    const isValid = listFields.every(name => {
+    const isValid = listFields.every((name) => {
       const { value } = this.state.fields[name]
       return this.isValidField(name, value)
     })
@@ -158,9 +158,9 @@ class Form extends PureComponent {
   }
 
   registerUpdate = (name, type, value) =>
-    new Promise(resolve => {
+    new Promise((resolve) => {
       this.setState(
-        prevState => ({
+        (prevState) => ({
           fields: {
             ...prevState.fields,
             [name]: {

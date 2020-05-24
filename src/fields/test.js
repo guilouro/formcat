@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, fireEvent } from 'react-testing-library'
+import { render, fireEvent } from '@testing-library/react'
 import { Form } from '..'
 import {
   InputField,
@@ -11,7 +11,7 @@ import {
 } from '.'
 
 jest.mock('lodash.debounce', () =>
-  jest.fn(fn => {
+  jest.fn((fn) => {
     fn.cancel = jest.fn()
     return fn
   })
@@ -66,7 +66,7 @@ describe('Fields', () => {
     ).toBeFalsy()
   })
 
-  it('Should submit correctly', done => {
+  it('Should submit correctly', (done) => {
     const onSubmit = jest.fn()
     const { container, getByText } = render(
       <Form onSubmit={onSubmit}>

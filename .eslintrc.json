@@ -1,16 +1,20 @@
 {
-    "extends": ["standard", "standard-react"],
-    "parser": "babel-eslint",
-    "env": {
-      "jest": true
-    },
-    "rules": {
-      "jsx-quotes": ["error", "prefer-double"],
-      "semi": ["error", "never"],
-      "space-before-function-paren": ["error", {
+  "extends": ["standard", "standard-react", "eslint-config-prettier"],
+  "parser": "babel-eslint",
+  "env": {
+    "jest": true
+  },
+  "rules": {
+    "react/jsx-handler-names": "off",
+    "jsx-quotes": ["error", "prefer-double"],
+    "semi": ["error", "never"],
+    "space-before-function-paren": [
+      "error",
+      {
         "anonymous": "never",
         "named": "never",
         "asyncArrow": "always"
-    }]
-    }
+      }
+    ]
+  }
 }

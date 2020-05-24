@@ -5,10 +5,10 @@ import Wrapper from './Wrapper'
 
 const RadiosField = ({ label, options, error, ...input }) => {
   const [checkedItem, setCheckedItem] = useState(
-    (options.find(item => item.checked) || {}).value
+    (options.find((item) => item.checked) || {}).value
   )
 
-  const handleClick = value => {
+  const handleClick = (value) => {
     setCheckedItem(value)
   }
 
@@ -19,7 +19,7 @@ const RadiosField = ({ label, options, error, ...input }) => {
           {label} {input.required && ' *'}
         </label>
       )}
-      {options.map(item => (
+      {options.map((item) => (
         <Wrapper
           key={item.value}
           label={item.label}

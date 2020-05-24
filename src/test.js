@@ -4,11 +4,11 @@ import {
   cleanup,
   fireEvent,
   waitForElement
-} from 'react-testing-library'
+} from '@testing-library/react'
 import { Form, withContextForm, withSubmit } from '.'
 
 jest.mock('lodash.debounce', () =>
-  jest.fn(fn => {
+  jest.fn((fn) => {
     fn.cancel = jest.fn()
     return fn
   })
@@ -21,7 +21,7 @@ const SimpleField = withContextForm(({ error, ...input }) => (
   </>
 ))
 
-const Submit = withSubmit(props => <button {...props} />)
+const Submit = withSubmit((props) => <button {...props} />)
 
 describe('<Form />', () => {
   afterEach(cleanup)
@@ -119,7 +119,7 @@ describe('<Form />', () => {
   })
 
   it('Should set error when field does not match validation', () => {
-    const validation = value => value === '@guilouro'
+    const validation = (value) => value === '@guilouro'
 
     const { container, getByText, queryByText } = render(
       <Form>
@@ -136,7 +136,7 @@ describe('<Form />', () => {
   })
 
   it('Should remove error when have validation match', () => {
-    const validation = value => value === '@guilouro'
+    const validation = (value) => value === '@guilouro'
 
     const { container, getByText, queryByText } = render(
       <Form>
@@ -156,7 +156,7 @@ describe('<Form />', () => {
   })
 
   it('Should check validation with keyUp after touch field', () => {
-    const validation = value => value === '@guilouro'
+    const validation = (value) => value === '@guilouro'
 
     const { container, getByText, queryByText } = render(
       <Form keyUpValidation>
@@ -177,7 +177,7 @@ describe('<Form />', () => {
   })
 
   it('Should not check validation with keyUp if field does not touched', () => {
-    const validation = value => value === '@guilouro'
+    const validation = (value) => value === '@guilouro'
 
     const { container, queryByText } = render(
       <Form keyUpValidation>
@@ -246,7 +246,7 @@ describe('<Form />', () => {
     expect(onKeyUp).toBeCalled()
   })
 
-  it('Should call onSubmit', done => {
+  it('Should call onSubmit', (done) => {
     const onSubmit = jest.fn()
     const { getByText } = render(
       <Form onSubmit={onSubmit}>
@@ -263,7 +263,7 @@ describe('<Form />', () => {
     })
   })
 
-  it('Should reset Form after submit', async done => {
+  it('Should reset Form after submit', async (done) => {
     const { container, getByText } = render(
       <Form clearAfterSubmit onSubmit={jest.fn()}>
         <SimpleField name="Lorem" />
@@ -346,7 +346,7 @@ describe('<Form />', () => {
     )
   })
 
-  it('Should return field values with onSubmit', done => {
+  it('Should return field values with onSubmit', (done) => {
     const onSubmit = jest.fn()
     const { container, getByText } = render(
       <Form onSubmit={onSubmit}>
@@ -382,7 +382,7 @@ describe('<Form />', () => {
     })
   })
 
-  it('Should return error when form is not valid', done => {
+  it('Should return error when form is not valid', (done) => {
     const onSubmit = jest.fn()
     const { container, getByText } = render(
       <Form onSubmit={onSubmit}>

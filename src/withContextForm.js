@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import get from 'lodash.get'
 import { Consumer } from './create'
 
-const withContextForm = WrapperComponent => {
+const withContextForm = (WrapperComponent) => {
   class Field extends Component {
     static propTypes = {
       context: PropTypes.object.isRequired,
@@ -37,7 +37,7 @@ const withContextForm = WrapperComponent => {
       this.props.context.onRegister(
         this.props.name,
         'value',
-        this.props.defaultValue || (this.props.defaultChecked || '')
+        this.props.defaultValue || this.props.defaultChecked || ''
       )
       this.props.context.onRegister(
         this.props.name,
@@ -51,7 +51,7 @@ const withContextForm = WrapperComponent => {
       )
       this.props.context.onRegister(this.props.name, 'validations', [
         ...this.props.validations,
-        ...(this.props.required ? [value => !!value] : [])
+        ...(this.props.required ? [(value) => !!value] : [])
       ])
     }
 
@@ -59,28 +59,28 @@ const withContextForm = WrapperComponent => {
       this.props.context.unRegister(this.props.name)
     }
 
-    handleBlur = e => {
+    handleBlur = (e) => {
       this.props.context.onBlur(e)
       if (this.props.onBlur) {
         this.props.onBlur(e)
       }
     }
 
-    handleKeyUp = e => {
+    handleKeyUp = (e) => {
       this.props.context.onKeyUp(e)
       if (this.props.onKeyUp) {
         this.props.onKeyUp(e)
       }
     }
 
-    handleChange = e => {
+    handleChange = (e) => {
       this.props.context.onChange(e)
       if (this.props.onChange) {
         this.props.onChange(e)
       }
     }
 
-    handleFocus = e => {
+    handleFocus = (e) => {
       this.props.context.onFocus(e)
       if (this.props.onFocus) {
         this.props.onFocus(e)
@@ -103,7 +103,7 @@ const withContextForm = WrapperComponent => {
       const error = get(context.fields[props.name], 'error', false)
 
       return (
-        <React.Fragment>
+        <>
           <WrapperComponent
             {...props}
             value={value}
@@ -114,12 +114,12 @@ const withContextForm = WrapperComponent => {
             onBlur={this.handleBlur}
             onKeyUp={this.handleKeyUp}
           />
-        </React.Fragment>
+        </>
       )
     }
   }
 
-  return props => (
+  return (props) => (
     <Consumer>
       {({
         fields,
