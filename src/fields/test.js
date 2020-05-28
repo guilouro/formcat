@@ -66,6 +66,30 @@ describe('Fields', () => {
     ).toBeFalsy()
   })
 
+  it('Should pass className to input element when have a props', () => {
+    render(
+      <Form>
+        <InputField data-testid="field" name="first_name" className="custom-class" required />
+      </Form>
+    )
+
+    expect(screen.getByTestId(/field/).getAttribute('class')).toBe('custom-class')
+  })
+
+  it('Should pass className to input element with error when have a props', () => {
+    render(
+      <Form>
+        <InputField data-testid="field" name="first_name" className="custom-class" required />
+      </Form>
+    )
+
+    const field = screen.getByTestId(/field/)
+    fireEvent.change(field)
+    fireEvent.blur(field)
+
+    expect(field.getAttribute('class')).toBe('custom-class formcat-error')
+  })
+
   it('Should submit correctly', (done) => {
     const onSubmit = jest.fn()
     const { container } = render(

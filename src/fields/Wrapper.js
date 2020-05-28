@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Wrapper = ({ label, required, children, error, reverse }) => {
+const Wrapper = ({ label, required, children, error, reverse, className }) => {
   const clone = React.cloneElement(children, {
     ...(!!label && { id: label }),
-    className: error ? 'formcat-error' : ''
+    className: `${className} ${error ? 'formcat-error' : ''}`.trim()
   })
   return (
     <div>
@@ -23,11 +23,13 @@ Wrapper.propTypes = {
   children: PropTypes.node,
   label: PropTypes.string,
   reverse: PropTypes.bool,
-  error: PropTypes.bool
+  error: PropTypes.bool,
+  className: PropTypes.string
 }
 
 Wrapper.defaultProps = {
   label: '',
+  className: '',
   required: false,
   error: false,
   reverse: false
